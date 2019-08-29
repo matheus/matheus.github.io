@@ -1,0 +1,13 @@
+title: Matheus
+email: maisprodutivo@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Curioso, minimalista, empreendedor, 
+  esposo, pai e paixonado por aprender e compartilhar.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "matheusxy.com" # the base hostname & protocol for your site, e.g. http://example.com
+github_username:  matheus
+
+theme: minima
+
+plugins:
+  - jekyll-feed
