@@ -4,8 +4,6 @@ title:
 permalink: /cfc/
 ---
 
-# Material para aulas de trânsito
-
 Aqui estão os materiais que uso em sala no curso para formação de condutores.
 
 #### [Lista de vídeos usados em aula](https://www.youtube.com/playlist?list=PLqPNEebtxXPMRInlhnZFa7eAR07rkK76j)
