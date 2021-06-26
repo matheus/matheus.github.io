@@ -2,7 +2,7 @@
 layout: post
 title: "Links"
 author: "Matheus"
-permalink: /Links/
+permalink: /links/
 ---
 
 Meus links
