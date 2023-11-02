@@ -1,0 +1,757 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* Reset */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body,html {
+	font-family: 'Montserrat', sans-serif !important;
+}
+/* Reset */
+
+/* Header */
+header.header {
+    background: #f6cde1;
+    padding: 20px 0;
+}
+img.logo {
+    clear: both;
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+}
+/* Header */
+
+/* Principal */
+section.principal {
+	padding: 75px 0;
+	background: #f6cde1;
+}
+section.principal h1 {
+	color: #525c67;
+	font-size: 40px;
+	font-weight: 600;
+	margin: 0 0 10px 0;
+}
+section.principal h2 {
+	color: #c95e90;
+	font-size: 26px;
+	font-weight: 500;
+	margin: 0 0 10px 0;
+}
+
+section.principal p {
+	color: #525c67;
+	font-size: 20px;
+	font-weight: 700;
+	margin: 5px 0;
+}
+a.cta {
+	background: #00AC69;
+	clear: both;
+	display: block;
+	padding: 23px 0;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+	font-size: 25px;
+	font-weight: 500;
+	width: 90%;
+	margin: 30px 60px 10px auto;
+	border-radius: 15px 15px 15px 15px;
+	-moz-border-radius: 15px 15px 15px 15px;
+	-webkit-border-radius: 15px 15px 15px 15px;	
+}
+a.cta:hover {
+	color: #ffffff;
+	background: #048251;
+}
+section.principal span {
+	clear: both;
+	display: block;
+	text-align: center;
+	color: #525c67;
+	margin-right:50px
+}
+img.potes-principal {
+    clear: both;
+    display: block;
+    width: 100%;
+    margin: 30px 0;
+}
+.pulsar {
+    animation-name: pulse;
+    -webkit-animation-name: pulse;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+@keyframes pulse{
+0%,100%{transform:scale(.9);opacity:.9;}
+50%{transform:scale(1);opacity:1;}
+}
+@-webkit-keyframes pulse{
+0%,100%{-webkit-transform:scale(.95);opacity:.7}
+50%{-webkit-transform:scale(1);opacity:1}
+}
+@-webkit-keyframes bounce {
+    from { }
+    to { -webkit-transform: translateY(-10px); }
+}
+@-moz-keyframes bounce { 
+    from { }
+    to { -moz-transform: translateY(-10px); }
+}
+@-ms-keyframes bounce { 
+    from { }
+    to { -ms-transform: translateY(-10px); }
+}
+@-o-keyframes bounce { 
+    from { }
+    to { -o-transform: translateY(-10px); }
+}
+@keyframes bounce { 
+    from { }
+    to { transform: translateY(-10px); }
+}
+.bounce {
+	-webkit-animation: bounce .4s ease infinite alternate;
+	-moz-animation: bounce .4s ease infinite alternate;
+	-ms-animation: bounce .4s ease infinite alternate;
+	-o-animation: bounce .4s ease infinite alternate;
+	animation: bounce .4s ease infinite alternate;
+}
+/* Principal */
+
+/* Veja o poder */
+section.poder {
+	padding: 75px 0;
+}
+section.poder h1 {
+	color: #525c67;
+	font-size: 38px;
+	font-weight: 600;
+	text-align: center;
+	margin: 0 0 10px 0;
+}
+section.poder h3 {
+	color: #525c67;
+	font-size: 20px;
+	font-weight: 400;
+	text-align: center;
+	margin: 0 0 50px 0;
+}
+.poder-item {
+	margin-bottom: 50px;
+}
+img.icon-poder {
+    clear: both;
+    display: block;
+    width: 40%;
+    margin: 0 auto 10px auto;
+}
+section.poder h2 {
+	color: #525c67;
+	font-size: 20px;
+	font-weight: 600;
+	text-align: center;
+	margin: 0 0 15px 0;
+}
+section.poder p {
+	text-align: center;
+	margin: 0;
+	color: #525c67;
+}
+a.cta-poder {
+	width: 45%;
+	margin:  0 auto 15px auto;
+}
+img.garantia-poder{
+	clear: both;
+    display: block;
+    width: 25%;
+    margin: 0 auto 10px auto;
+}
+/* Veja o poder */
+
+/* Antes e Depois */
+section.antes-depois {
+	padding: 75px 0;
+	background: #6a2b49;
+}
+section.antes-depois h1 {
+	color: #ffffff;
+	font-size: 40px;
+	font-weight: 600;
+	text-align: center;
+	margin: 0 0 30px 0;
+}
+section.antes-depois h2 {
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: 400;
+	text-align: center;
+	margin: 0 0 30px 0;
+}
+img.antes-depois {
+    width: 80%;
+	margin-left:90px;
+	border-radius: 15px 15px 15px 15px;
+	-moz-border-radius: 15px 15px 15px 15px;
+	-webkit-border-radius: 15px 15px 15px 15px;	
+}
+section.antes-depois h3 {
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: 700;
+	margin: 40px 0;
+}
+section.antes-depois span {
+	clear: both;
+	display: block;
+	text-align: center;
+	color: #ffffff;
+	margin-right:40px;
+}
+/* Antes e Depois */
+
+/* Fórmula */
+section.formula {
+	padding: 75px 0;
+}
+section.formula  h1 {
+	color: #525c67;
+	font-size: 40px;
+	font-weight: 600;
+	text-align: center;
+	margin: 0 0 10px 0;
+}
+section.formula p {
+	color: #525c67;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.2;
+}
+a.cta-formula {
+    width: 45%;
+    margin: 50px auto 0 auto;
+}
+section.formula  h2 {
+	color: #CD6B99;
+	font-size: 25px;
+	font-weight: 600;
+	text-align: center;
+	margin: 0 0 15px 0;
+}
+section.formula span {
+	clear: both;
+	display: block;
+	text-align: center;
+	color: #000000;
+	margin: 15px auto 0 auto;
+}
+img.icon-formula {
+    clear: both;
+    display: block;
+    width: 50%;
+    margin: 50px auto 10px auto;
+	border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+}
+/* Fórmula */
+
+/* Resultados */
+section.resultados {
+    padding: 75px 0;
+    background: #562139;
+}
+section.resultados h1 {
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+section.resultados h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 50px 0;
+}
+ .carousel {
+        display: flex;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        width: 100%;
+      }
+
+      .carousel img {
+        width: 100%;
+		object-fit: cover;
+		margin-right: 20px;
+      }
+	  .carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.container-cour {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+/* Resultados */
+
+/* Garantia */
+section.garantia {
+	padding: 75px 0;
+	background:#a24672;
+}
+section.garantia h1 {
+    color: #ffffff;
+    font-size: 38px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+img.selo-garantia {
+    clear: both;
+    display: block;
+    width: 20%;
+    margin: auto;
+}
+section.garantia p {
+	color: #ffffff;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.5;
+	margin-top:15px;
+}
+section.garantia {
+	text-align: center;
+}
+a.cta-garantia {
+    width: 45%;
+    margin: 50px auto 15px auto;
+}
+/* Garantia */
+
+/* Oferta */
+section.oferta {
+    padding: 75px 0;
+    background: #6a2b49;
+}
+section.oferta h1 {
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+section.oferta h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+section.oferta p {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0 0 50px 0;
+}
+img.faixa-oferta {
+    clear: both;
+    display: block;
+    width: 60%;
+    margin: 0 auto 30px auto;
+}
+section.oferta h3 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 50px 0 30px 0;
+}
+/* Oferta */
+
+/* FAQ */
+section.faq {
+    padding: 75px 0;
+}
+section.faq h1 {
+    color: #525c67;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 50px 0;
+}
+section.faq h2 {
+    color: #525c67;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin: -30px 0 30px 0;
+}
+.faq-item {
+    clear: both;
+    display: block;
+    overflow: hidden;
+	margin: 0 0 10px 0;
+}
+.accordion {
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+  transition: 0.4s;
+	border: none;
+	position: relative;
+    color: #525c67;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    clear: both;
+    display: block;
+    padding: 20px 20px 30px 20px;
+    background: #afafa;
+    -webkit-transition: all .4s linear;
+    -moz-transition: all .4s linear;
+    transition: all .4s linear;
+}
+button.accordion svg {
+    margin-top: -5px;
+}
+.panel {
+    padding: 0 25px;
+    background: #fafafa;
+    color: #000000;
+    max-height: 0;
+    margin-top: -12px;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.panel p {
+    margin: 25px 0;
+}
+a.cta-faq {
+	width: 45%;
+	margin:  30px auto 15px auto;
+}
+/* FAQ */
+
+/* WhatsApp */
+section.whatsapp {
+    padding: 75px 0;
+}
+section.whatsapp h1 {
+    color: #a24672;
+    font-size: 38px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 20px 0;
+}
+img.icon-wpp {
+    clear: both;
+    display: block;
+    width: 8%;
+    margin: 0 auto 50px auto;
+}
+section.whatsapp p {
+	text-align: center;
+	color: #525c67;
+	font-size: 20px;
+	font-weight: 500;
+}
+section.whatsapp h2 {
+	text-align: center;
+	color: #525c67;
+	font-size: 20px;
+	font-weight: 500;
+	margin-top:50px;
+}
+a.cta-whatsapp {
+    width: 40%;
+    margin: 50px auto 20px auto;
+}
+section.whatsapp span {
+	clear: both;
+	display: block;
+	text-align: center;
+	color: #ffffff;
+	margin: 15px auto 0 auto;
+}
+/* WhatsApp */
+
+/* Footer */
+footer.footer {
+	padding: 50px 0;
+	background: #6a2b49;
+}
+img.logo-ft {
+    clear: both;
+    display: block;
+	width: 80%;
+    margin: 0 auto 30px auto;
+}
+img.nao-testado-animais {
+    clear: both;
+    display: block;
+	width: 80%;
+    margin: 0 auto;
+}
+footer.footer h1 {
+	clear: both;
+	display: block;
+	font-size: 20px;
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0 0 10px 0;
+}
+a.link-ft {
+    clear: both;
+    display: block;
+    margin: 0 0 10px 0;
+	color: #ffffff;
+}
+a.link-ft:hover {
+	color: #FFFFFF;
+}
+img.correios {
+	width:80%;
+	clear: both;
+	display: block;
+	border-radius: 15px 15px 15px 15px;
+	-moz-border-radius: 15px 15px 15px 15px;
+	-webkit-border-radius: 15px 15px 15px 15px;	
+}
+img.formas-pagamento {
+	clear: both;
+	display: block;
+	width: 80%;
+}
+img.compra-segura {
+	clear: both;
+	display: block;
+	width: 80%;
+	border-radius: 15px 15px 15px 15px;
+	-moz-border-radius: 15px 15px 15px 15px;
+	-webkit-border-radius: 15px 15px 15px 15px;	
+}
+/* Footer */
+
+/* Responsivo */
+@media (max-width: 800px) {
+	img.logo {
+		width: 150px;
+	}
+	/* Principal */
+	section.principal, section.poder {
+		padding: 50px 0;
+	}
+	section.principal h1 {
+		font-size: 22px;
+	}
+	section.principal h2 {
+		font-size: 18px;
+	}
+	section.principal p {
+		font-size: 14px;
+	}
+	a.cta {
+		width: 100%;
+		font-size: 20px;
+		padding: 10px;
+	}
+	section.principal span {
+		font-size: 11px;
+		margin-left:50px;
+	}
+	/* Principal */
+	
+	/* Poder */
+	img.h1-poder {
+		width: 100%;
+	}
+	img.garantia-poder{
+		width:60%;
+	}
+	section.poder h1 {
+		font-size: 22px;
+		margin: 0 0 30px 0;
+	}
+	section.poder span {
+		font-size: 14px;
+	}
+	/* Poder */
+	
+	/* Antes e Depois */
+	section.antes-depois {
+		padding: 50px 0;
+	}
+	section.antes-depois h1 {
+		font-size: 22px;
+	}
+	section.antes-depois h3 {
+		font-size: 15px;
+		margin: 20px 0;
+	}
+	section.antes-depois span {
+		font-size: 14px;
+		margin:auto;
+	}
+	img.antes-depois {
+	margin: auto;
+	width:100%;
+	}
+	/* Antes e Depois */
+	
+	/* Fórmula */
+	section.formula {
+		padding: 50px 0;
+	}
+	section.formula h1 {
+		font-size: 22px;
+	}
+	img.frasco-formula {
+		margin: 0 auto 30px auto;
+	}
+	section.formula p {
+		font-size: 16px;
+	}
+	section.formula span {
+		font-size: 14px;
+	}
+	/* Fórmula */
+	
+	/* Resultados */
+	section.resultados {
+		padding: 50px 0;
+	}
+	section.resultados h1 {
+		font-size: 22px;
+	}
+	section.resultados h2 {
+		font-size: 20px;
+	}
+	section.resultados h3 {
+		font-size: 18px;
+		margin: 0 0 30px 0;
+	}
+	img.foto-resultado {
+		margin: 10px auto;
+	}
+	section.resultados span {
+		font-size: 14px;
+	}
+	/* Resultados */
+	
+	/* Garantia */
+	section.garantia {
+		padding: 50px 0;
+	}
+	section.garantia h1 {
+		font-size: 22px;
+	}
+	img.selo-garantia {
+		width: 50%;
+		margin: 0 auto 20px auto;
+	}
+	section.garantia span {
+		font-size: 14px;
+	}
+	/* Garantia */
+	
+	/* Oferta */
+	section.oferta {
+		padding: 50px 0;
+	}
+	section.oferta h1 {
+		font-size: 22px;
+	}
+	section.oferta h2 {
+		font-size: 20px;
+	}
+	img.faixa-oferta {
+		width: 100%;
+	}
+	img.banner-oferta {
+		clear: both;
+		display: block;
+		width: 80%;
+		margin: 0 auto 30px auto;
+	}	
+	/* Oferta */
+	
+	/* Faq */
+	section.faq {
+		padding: 50px 0;
+	}
+	section.faq h1 {
+		font-size: 22px;
+		margin: 0 0 30px 0;
+	}
+	/* Faq */
+	
+	/* Whatsapp */
+	section.whatsapp {
+		padding: 50px 0;
+	}
+	img.icon-wpp {
+		width: 20%;
+		margin: 0 auto 30px auto;
+	}
+	section.whatsapp h1 {
+		font-size: 22px;
+	}
+	section.whatsapp span {
+		font-size: 14px;
+	}
+	/* Whatsapp */
+	
+	/* Rodapé */
+	img.logo-ft {
+		width: 50%;
+	}
+	img.nao-testado-animais {
+		width: 50%;
+		margin-bottom: 30px;
+	}
+	footer.footer h1 {
+		text-align: center;
+	}
+	a.link-ft {
+		clear: both;
+		display: block;
+		text-align: center;
+		margin: 0 0 20px 0;
+	}
+	img.formas-pagamento {
+		clear: both;
+		display: block;
+		width: 50%;
+		margin: 30px auto;
+	}
+	img.compra-segura {
+		width: 50%;
+		margin: 0 auto;
+	}
+	img.correios {
+		width: 50%;
+		margin: 0 auto 20px;
+	}	
+	/* Rodapé */
+}
+/* Responsivo */
