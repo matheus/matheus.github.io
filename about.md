@@ -1,18 +1,9 @@
 ---
 layout: page
-title: Sobre
-permalink: /about/
+title: Agora
+permalink: /now/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Um site com um link que diz “agora” vai para uma página que lhe diz o que esta pessoa está focada neste momento em sua vida. Para resumir, chamamos-lhe um “now page”.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+Veja exemplos navegando [nownownow.com](https://nownownow.com)
