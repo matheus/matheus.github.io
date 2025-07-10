@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matheus Automations - matheus.lat</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --fg: #111111;
+      --accent: #5f00d7;
+      --accent-hover: #4300a3;
+      --font: Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      margin: 1rem auto;
+      display: block;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    p.description {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .cta-button {
+      background-color: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+
+    .cta-button:hover {
+      background-color: var(--accent-hover);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .links a {
+      margin: 0 1rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    .links a:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p.description {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="matheus.png" alt="Matheus Photo" class="profile-photo" />
+    <h1>Automations for Your Business – Made Easy</h1>
+    <p class="description">
+      I'm Matheus. I create automation solutions using Make.com and AI to streamline your workflows. Browse my catalog and request any adjustment for a fixed price of $10.
+    </p>
+    <a class="cta-button" href="YOUR_FORM_LINK_HERE" target="_blank">Request Your Automation</a>
+  </header>
+  <footer>
+    <div class="links">
+      <a href="https://x.com/matheusdotlat" target="_blank">X Profile</a>
+      <a href="YOUR_BLOG_URL" target="_blank">Blog</a>
+    </div>
+  </footer>
+</body>
+</html>
