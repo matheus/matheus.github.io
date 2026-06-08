@@ -1,0 +1,10 @@
+<article class="post-card">
+  <a href="{{ post.url }}" class="post-card-link">
+    <h2 class="post-card-title">{{ post.title }}</h2>
+    <p class="post-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+    <div class="post-card-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d de %B de %Y' }}</time>
+      <span class="reading-time">{{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min de leitura</span>
+    </div>
+  </a>
+</article>

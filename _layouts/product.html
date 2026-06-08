@@ -1,0 +1,48 @@
+---
+layout: default
+---
+<div class="product-page">
+  <section class="product-hero">
+    <div class="container">
+      <h1 class="product-title">{{ page.title }}</h1>
+      {% if page.subtitle %}
+        <p class="product-subtitle">{{ page.subtitle }}</p>
+      {% endif %}
+      {% if page.cta_text %}
+        <div class="product-cta">
+          <a href="{{ page.cta_url }}" class="btn btn-primary btn-lg" target="_blank">{{ page.cta_text }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  {% if page.features %}
+  <section class="feature-section container">
+    <div class="feature-grid">
+      {% for feature in page.features %}
+      <div class="feature-card">
+        <div class="feature-icon">{{ feature.icon }}</div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if content != '' %}
+  <section class="product-content reading-width">
+    {{ content }}
+  </section>
+  {% endif %}
+
+  <section class="product-cta-section">
+    <h2>Pronto para automatizar?</h2>
+    <p>Entre em contato e vamos transformar seu negócio.</p>
+    {% if page.cta_text %}
+      <div class="product-cta">
+        <a href="{{ page.cta_url }}" class="btn btn-primary btn-lg" target="_blank">{{ page.cta_text }}</a>
+      </div>
+    {% endif %}
+  </section>
+</div>

@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<section class="hero fade-in-up">
+  <img src="/matheus.png" alt="{{ site.title }}" class="hero-photo" />
+  <h1 class="hero-name">{{ site.title }}</h1>
+  <p class="hero-tagline">{{ site.description }}</p>
+</section>
+
+<section class="posts-section container">
+  <h2 class="section-title">Últimos Artigos</h2>
+  <div class="post-list">
+    {% for post in site.posts %}
+      {% include post-card.html post=post %}
+    {% endfor %}
+  </div>
+  {% if site.posts.size == 0 %}
+    <p class="no-posts">Nenhum artigo ainda. Em breve!</p>
+  {% endif %}
+</section>
