@@ -6,6 +6,10 @@
   <title>Empresário Artificial | Mais Clientes</title>
   <meta name="description" content="Mais Clientes: sistema pronto para micro empresas receberem mais pedidos de orçamento, organizarem clientes e venderem mais. Pagamento único, sem mensalidade.">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #F7F9FC;
@@ -15,6 +19,8 @@
       --muted: #5D6B82;
       --blue: #2F80ED;
       --blue-light: #56CCF2;
+      --cta: #0000A3;
+      --cta-hover: #000078;
       --green: #27AE60;
       --green-dark: #1F8A4D;
       --shadow: 0 24px 70px rgba(22, 33, 62, .09);
@@ -123,18 +129,18 @@
       min-height: 64px;
       padding: 0 30px;
       border-radius: 18px;
-      background: var(--green);
+      background: var(--cta);
       color: #fff;
       font-size: 20px;
       font-weight: 900;
       letter-spacing: -0.025em;
-      box-shadow: 0 18px 38px rgba(39, 174, 96, .28);
+      box-shadow: 0 18px 38px rgba(0, 0, 163, .24);
       transition: .18s ease;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      background: var(--green-dark);
+      background: var(--cta-hover);
     }
 
     .note {
@@ -381,7 +387,7 @@
       margin-top: 24px;
       width: 190px;
       height: 54px;
-      background: var(--green);
+      background: var(--cta);
       border-radius: 18px;
     }
 
