@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecionando...</title>
+    <script>
+        // Pega o caminho que o usuário tentou acessar
+        var path = window.location.pathname;
+
+        // Se for a rota de notícias, redireciona para o Notion
+        if (path === '/noticias' || path === '/noticias/') {
+            window.location.href = "https://matheusgodoy.notion.site/News-390501bc9071801ea083e237b4e1fdb1";
+        } else {
+            // Caso contrário, você pode mandar para a home ou exibir um 404 real
+            window.location.href = "/";
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
