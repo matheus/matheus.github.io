@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TierCraft - Criador e Apresentador de Tier List</title>
+  <meta name="description" content="Crie, personalize, organize e apresente suas Tier Lists personalizadas com fotos e textos de forma totalmente estática e interativa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App Header Navigation -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo">
+        <span class="logo-icon">🏆</span>
+        <span class="logo-text">Tier<span class="gradient-text">Craft</span></span>
+      </div>
+      <div class="tierlist-selector">
+        <select id="select-tierlist" aria-label="Selecionar TierList">
+          <!-- Populated dynamically -->
+        </select>
+        <button id="btn-new-tierlist" class="btn btn-secondary btn-icon-only" title="Nova Tier List">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </button>
+        <button id="btn-rename-tierlist" class="btn btn-secondary btn-icon-only" title="Renomear Tier List Atual">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        </button>
+        <button id="btn-delete-tierlist" class="btn btn-danger-soft btn-icon-only" title="Excluir Tier List Atual">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button id="btn-focus-mode" class="btn btn-primary" title="Modo Apresentação (Atalho: F)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        Modo Foco (F)
+      </button>
+
+      <button id="btn-export-image" class="btn btn-emerald">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        Exportar Imagem
+      </button>
+
+      <button id="btn-backup-modal" class="btn btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        Backup JSON
+      </button>
+
+      <button id="btn-reset-board" class="btn btn-ghost" title="Mover todos os itens para o banco">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+        Limpar Quadro
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-main">
+    
+    <!-- TierList Presentation & Edit Container -->
+    <section class="tierlist-container">
+      
+      <!-- TierList Header Info -->
+      <div class="tierlist-info">
+        <div class="tierlist-title-wrap">
+          <h1 id="tierlist-title" class="editable-title" contenteditable="true" spellcheck="false" title="Clique para editar o título">Minha Tier List</h1>
+          <p id="tierlist-desc" class="editable-desc" contenteditable="true" spellcheck="false" title="Clique para editar a descrição">Clique nos títulos ou descrições para personalizar. Arraste itens para as fileiras.</p>
+        </div>
+        <div class="board-actions">
+          <button id="btn-add-row" class="btn btn-primary btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Nova Fileira
+          </button>
+        </div>
+      </div>
+
+      <!-- Tier Rows Board -->
+      <div id="tier-rows-board" class="tier-board">
+        <!-- Tier rows generated dynamically -->
+      </div>
+
+    </section>
+
+    <!-- Unranked Items Drawer / Bank -->
+    <section class="items-bank-section">
+      <div class="bank-header">
+        <div class="bank-title">
+          <h2>Itens não classificados <span id="items-count-badge" class="badge">0</span></h2>
+          <p class="subtitle">Adicione novas fotos ou textos para arrastar até as fileiras acima</p>
+        </div>
+        <div class="bank-controls">
+          <div class="search-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="search-items" placeholder="Filtrar itens...">
+          </div>
+          <button id="btn-open-add-item-modal" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Criar Novo Item
+          </button>
+        </div>
+      </div>
+
+      <!-- Bank Drop Zone Container -->
+      <div id="unranked-items-container" class="unranked-container dropzone" data-row-id="unranked">
+        <div class="empty-bank-message" id="empty-bank-msg">
+          <span class="empty-icon">🎨</span>
+          <p>Nenhum item não classificado.</p>
+          <small>Clique em "Criar Novo Item" ou solte imagens diretamente aqui!</small>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Criar / Editar Item (Imagem ou Texto) -->
+  <div id="modal-item" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-item-title">Adicionar Novo Item ao Tier</h3>
+        <button class="modal-close" data-close="modal-item">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Type Tabs -->
+        <div class="tab-buttons">
+          <button type="button" class="tab-btn active" data-tab="tab-image">🖼️ Imagem</button>
+          <button type="button" class="tab-btn" data-tab="tab-text">📝 Card de Texto</button>
+        </div>
+
+        <!-- Tab 1: Image Item -->
+        <div id="tab-image" class="tab-content active">
+          <div class="form-group">
+            <label>Enviar Fotos do Dispositivo (Aceita Múltiplas)</label>
+            <div class="file-drop-area" id="file-drop-area">
+              <span class="file-drop-icon">📁</span>
+              <span class="file-drop-text">Arraste imagens aqui ou <strong>Clique para Escolher Files</strong></span>
+              <input type="file" id="item-image-file" accept="image/*" multiple hidden>
+            </div>
+          </div>
+          <div class="divider">OU</div>
+          <div class="form-group">
+            <label for="item-image-url">URL da Imagem</label>
+            <input type="url" id="item-image-url" placeholder="https://exemplo.com/imagem.png">
+          </div>
+          <div class="form-group">
+            <label for="item-image-label">Legenda (Opcional)</label>
+            <input type="text" id="item-image-label" placeholder="Ex: Personagem A / Filme B">
+          </div>
+        </div>
+
+        <!-- Tab 2: Text Card Item -->
+        <div id="tab-text" class="tab-content">
+          <div class="form-group">
+            <label for="item-text-title">Texto do Card *</label>
+            <input type="text" id="item-text-title" placeholder="Ex: God of War, Python, Opção A...">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="item-bg-color">Cor de Fundo</label>
+              <input type="color" id="item-bg-color" value="#2a2d3d">
+            </div>
+            <div class="form-group">
+              <label for="item-text-color">Cor do Texto</label>
+              <input type="color" id="item-text-color" value="#ffffff">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Pré-visualização</label>
+            <div class="item-preview-box">
+              <div id="text-card-preview" class="tier-item text-item-style">Texto de Exemplo</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="modal-item">Cancelar</button>
+        <button id="btn-save-item" class="btn btn-primary">Adicionar Item</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Editar Fileira / Tier Row -->
+  <div id="modal-row" class="modal-backdrop">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h3>Editar Fileira de Tier</h3>
+        <button class="modal-close" data-close="modal-row">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-row-id">
+        <div class="form-group">
+          <label for="row-label-input">Título / Rótulo da Linha *</label>
+          <input type="text" id="row-label-input" placeholder="Ex: S, SSS, Imperdível, Top 10, Lixo...">
+        </div>
+        <div class="form-group">
+          <label>Cor do Emblema</label>
+          <div class="color-presets" id="color-presets">
+            <button type="button" class="color-dot active" data-color="#ff4757" style="background: #ff4757;"></button>
+            <button type="button" class="color-dot" data-color="#ff7f50" style="background: #ff7f50;"></button>
+            <button type="button" class="color-dot" data-color="#ffa502" style="background: #ffa502;"></button>
+            <button type="button" class="color-dot" data-color="#eccc68" style="background: #eccc68;"></button>
+            <button type="button" class="color-dot" data-color="#2ed573" style="background: #2ed573;"></button>
+            <button type="button" class="color-dot" data-color="#1e90ff" style="background: #1e90ff;"></button>
+            <button type="button" class="color-dot" data-color="#9b59b6" style="background: #9b59b6;"></button>
+            <button type="button" class="color-dot" data-color="#ec4899" style="background: #ec4899;"></button>
+            <button type="button" class="color-dot" data-color="#718093" style="background: #718093;"></button>
+          </div>
+          <div class="form-row margin-top-sm">
+            <label for="row-custom-color" class="text-sm">Cor personalizada:</label>
+            <input type="color" id="row-custom-color" value="#ff4757">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger-soft" id="btn-delete-row">Excluir Linha</button>
+        <button class="btn btn-primary" id="btn-save-row">Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Importar / Exportar Backup JSON -->
+  <div id="modal-backup" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Backup de Dados (JSON)</h3>
+        <button class="modal-close" data-close="modal-backup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-subtitle">Exporte suas Tier Lists para salvar um arquivo no seu computador, ou importe um arquivo para restaurar suas listas.</p>
+        
+        <div class="backup-actions-grid">
+          <div class="backup-card">
+            <h4>📥 Exportar Backup</h4>
+            <p>Baixe todas as suas Tier Lists e imagens como um arquivo JSON portátil.</p>
+            <button id="btn-download-json" class="btn btn-primary btn-block">Download Arquivo JSON</button>
+          </div>
+
+          <div class="backup-card">
+            <h4>📤 Importar Backup</h4>
+            <p>Selecione um arquivo `.json` de backup salvo anteriormente.</p>
+            <label for="input-import-json" class="btn btn-secondary btn-block">
+              Escolher Arquivo JSON
+              <input type="file" id="input-import-json" accept=".json" hidden>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group margin-top-md">
+          <label for="json-preview">Visualizar / Colar Código JSON</label>
+          <textarea id="json-preview" rows="5" placeholder="Código JSON do backup..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-apply-json-text" class="btn btn-secondary">Restaurar do Texto Colado</button>
+        <button class="btn btn-ghost" data-close="modal-backup">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Criar Nova TierList -->
+  <div id="modal-new-list" class="modal-backdrop">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h3>Criar Nova Tier List</h3>
+        <button class="modal-close" data-close="modal-new-list">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="new-list-title">Nome da Nova Tier List *</label>
+          <input type="text" id="new-list-title" placeholder="Ex: Melhores Animes 2026">
+        </div>
+        <div class="form-group">
+          <label for="new-list-preset">Estrutura Inicial</label>
+          <select id="new-list-preset">
+            <option value="standard">Padrão (S, A, B, C, D)</option>
+            <option value="gaming">Gaming (Tier SSS, S, A, B, C, F)</option>
+            <option value="simple">Simples (Excelente, Bom, Neutro, Ruim)</option>
+            <option value="empty">Vazia (Sem linhas)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="modal-new-list">Cancelar</button>
+        <button id="btn-confirm-new-list" class="btn btn-primary">Criar Tier List</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Canvas for PNG Image Generation -->
+  <canvas id="export-canvas" style="display:none;"></canvas>
+
+  <!-- Floating Exit Focus Mode Toast -->
+  <div id="focus-exit-toast" class="focus-exit-toast" title="Clique ou pressione F / ESC para sair do modo foco">
+    <span>📺 Modo Foco / Apresentação Ativo</span>
+    <button id="btn-exit-focus" class="btn btn-sm btn-secondary">Sair do Modo Foco (ESC)</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
