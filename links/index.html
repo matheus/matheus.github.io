@@ -39,7 +39,7 @@
       padding: 36px 18px 52px;
     }
 
-    header { margin-bottom: 34px; }
+    header { margin-bottom: 26px; }
 
     h1 {
       margin: 0;
@@ -55,14 +55,57 @@
       font-size: 1.05rem;
     }
 
+    .filters {
+      display: flex;
+      gap: 8px;
+      margin: 0 -18px 30px;
+      padding: 0 18px 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar { display: none; }
+
+    .filter {
+      min-height: 40px;
+      padding: 8px 14px;
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--muted);
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 650;
+      cursor: pointer;
+      transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+    }
+
+    .filter:hover { border-color: #9cbeff; color: var(--primary); }
+
+    .filter[aria-pressed="true"] {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .filter:focus-visible {
+      outline: 3px solid #8ab5ff;
+      outline-offset: 2px;
+    }
+
     #list { display: grid; gap: 30px; }
 
     section { scroll-margin-top: 20px; }
 
     h2 {
-      margin: 0 0 12px;
-      font-size: 1.22rem;
-      letter-spacing: -.02em;
+      margin: 0 0 14px;
+      padding-left: 12px;
+      border-left: 4px solid var(--primary);
+      color: #101b31;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
     }
 
     .products {
@@ -117,8 +160,9 @@
 
     @media (min-width: 640px) {
       .page { padding: 64px 30px 80px; }
+      .filters { margin-right: 0; margin-left: 0; padding-right: 0; padding-left: 0; }
       #list { gap: 38px; }
-      h2 { font-size: 1.35rem; }
+      h2 { font-size: 1.45rem; }
       .product a { min-height: 54px; padding-top: 13px; padding-bottom: 13px; font-size: 1.05rem; }
     }
 
@@ -131,23 +175,24 @@
 <body>
   <main class="page">
     <header>
-      <h1>Links recomendados</h1>
+      <h1>PRODUTOS QUE RECOMENDO</h1>
       <p class="intro">Uma seleção direta de produtos que recomendo. Escolha uma categoria e toque no item para ver a oferta.</p>
     </header>
 
+    <div class="filters" id="filters" aria-label="Filtrar por categoria"></div>
     <div id="list" aria-live="polite"></div>
   </main>
 
   <script>
     const list = document.getElementById('list');
+    const filters = document.getElementById('filters');
 
-    fetch('./products.json')
-      .then((response) => {
-        if (!response.ok) throw new Error('Não foi possível carregar os produtos.');
-        return response.json();
-      })
-      .then(({ categories }) => {
-        categories.forEach((category) => {
+    const render = (categories, selectedCategory = 'Todos') => {
+      list.replaceChildren();
+
+      categories
+        .filter((category) => selectedCategory === 'Todos' || category.name === selectedCategory)
+        .forEach((category) => {
           const section = document.createElement('section');
           const title = document.createElement('h2');
           const products = document.createElement('ul');
@@ -172,6 +217,32 @@
           section.append(title, products);
           list.append(section);
         });
+    };
+
+    fetch('./products.json')
+      .then((response) => {
+        if (!response.ok) throw new Error('Não foi possível carregar os produtos.');
+        return response.json();
+      })
+      .then(({ categories }) => {
+        ['Todos', ...categories.map((category) => category.name)].forEach((categoryName) => {
+          const filter = document.createElement('button');
+
+          filter.className = 'filter';
+          filter.type = 'button';
+          filter.textContent = categoryName;
+          filter.setAttribute('aria-pressed', categoryName === 'Todos');
+          filter.addEventListener('click', () => {
+            filters.querySelectorAll('.filter').forEach((button) => {
+              button.setAttribute('aria-pressed', button === filter);
+            });
+            render(categories, categoryName);
+          });
+
+          filters.append(filter);
+        });
+
+        render(categories);
       })
       .catch((error) => {
         const message = document.createElement('p');
