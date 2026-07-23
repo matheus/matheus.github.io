@@ -1,0 +1,42 @@
+{
+  "categories": [
+    {
+      "name": "Acessórios",
+      "products": [
+        { "name": "Caneta Lenovo para tablets", "url": "https://meli.la/1ofv8Qb" },
+        { "name": "Mouse Logitech", "url": "https://meli.la/2GnNxDS" },
+        { "name": "Mouse Pad", "url": "https://s.shopee.com.br/6VMEoap3qV" },
+        { "name": "Teclado sem fio Baseus", "url": "https://meli.la/1ofv8Qb" },
+        { "name": "Fone bluetooth Lenovo", "url": "https://meli.la/2Np3DWy" },
+        { "name": "Suporte de mesa para smartphones e tablets", "url": "https://meli.la/1VxNvsL" }
+      ]
+    },
+    {
+      "name": "Smartphones",
+      "products": [
+        { "name": "Samsung Galaxy A26", "url": "https://meli.la/1Fae1gX" },
+        { "name": "Samsung Galaxy A35", "url": "https://meli.la/1j3XiTh" },
+        { "name": "Samsung Galaxy A36", "url": "https://meli.la/1XZYdom" },
+        { "name": "Samsung Galaxy A55", "url": "https://meli.la/2uRdM9k" },
+        { "name": "Samsung Galaxy A56", "url": "https://meli.la/2tW8Dg6" },
+        { "name": "Samsung Galaxy A57", "url": "https://meli.la/2FvoNyT" },
+        { "name": "Samsung Galaxy S24 Ultra", "url": "https://meli.la/2dFzBPf" },
+        { "name": "Samsung Galaxy S25 Ultra", "url": "https://meli.la/1ezfhpS" },
+        { "name": "Samsung Galaxy S25 Plus", "url": "https://meli.la/1dJDFJZ" }
+      ]
+    },
+    {
+      "name": "Tablets",
+      "products": [
+        { "name": "RedmiPad 2", "url": "https://meli.la/1rNaHh1" }
+      ]
+    },
+    {
+      "name": "Notebooks",
+      "products": [
+        { "name": "Notebook Lenovo Thinkpad", "url": "https://s.shopee.com.br/3g23PsBQ6g" },
+        { "name": "Carregador Universal para notebooks", "url": "https://s.shopee.com.br/3LPD1D0Z08" }
+      ]
+    }
+  ]
+}
