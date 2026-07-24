@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fluxo Mental</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="appShell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Fluxo Mental">fluxo<span>mental</span></a>
+        <div class="map-title-wrap"><input id="mapTitle" aria-label="Nome do mapa" value="Roteiro sem título" /></div>
+        <div class="top-actions">
+          <button class="button button-ghost" id="editToggle" title="Alternar edição (E)">✎ <span>Editar</span></button>
+          <button class="button button-primary" id="focusToggle" title="Modo foco (F)">⊙ <span>Apresentar</span></button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="sidebar" id="sidebar">
+          <section class="panel editor-panel">
+            <div class="panel-heading"><div><p class="eyebrow">Conteúdo</p><h2>Mapa em texto</h2></div><button class="icon-button" id="newMap" title="Novo mapa">+</button></div>
+            <textarea id="source" spellcheck="false" aria-label="Texto do mapa mental"></textarea>
+            <p class="hint">Use dois espaços para cada nível. Adicione <code>[destaque]</code> ao fim de um tópico para destacá-lo.</p>
+          </section>
+          <section class="panel settings-panel">
+            <div class="panel-heading"><div><p class="eyebrow">Aparência</p><h2>Tema YAML</h2></div><button class="icon-button" id="themeToggle" title="Mostrar ou ocultar tema">⌄</button></div>
+            <textarea id="themeSource" spellcheck="false" aria-label="Configuração do tema"></textarea>
+            <div class="theme-presets"><button data-theme="aurora">Aurora</button><button data-theme="oceano">Oceano</button><button data-theme="papel">Papel</button></div>
+          </section>
+          <section class="storage-actions">
+            <button id="saveMap">Salvar localmente</button><button id="mapsToggle">Meus mapas</button>
+            <button id="exportAll">Exportar backup</button><label for="importFile">Importar backup</label><input id="importFile" type="file" accept="application/json" />
+          </section>
+          <div class="saved-maps" id="savedMaps"></div>
+        </aside>
+
+        <section class="stage" id="stage">
+          <div class="stage-toolbar"><span id="topicPath">Visão geral</span><div class="map-controls"><button id="zoomOut" title="Afastar">−</button><button id="zoomReset" title="Ajustar à tela">⌗</button><button id="zoomIn" title="Aproximar">+</button><span id="zoomLabel">100%</span><span class="keys"><kbd>←</kbd> recolhe <kbd>→</kbd> expande <kbd>↑</kbd><kbd>↓</kbd> navega <kbd>L</kbd> laser</span></div></div>
+          <div class="map-canvas" id="mapCanvas" aria-label="Visualização do mapa"></div>
+          <div class="laser" id="laser" aria-hidden="true"></div>
+          <footer class="progress"><span id="progressLabel">0 de 0 tópicos</span><div class="progress-track"><i id="progressBar"></i></div><span id="progressPercent">0%</span></footer>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
