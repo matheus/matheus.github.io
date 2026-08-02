@@ -59,6 +59,7 @@
   let draggedItemId = null;
   let touchDragElement = null;
   let touchClone = null;
+  let editingItemId = null;
 
   // DOM Elements References
   const selectTierList = document.getElementById('select-tierlist');
@@ -339,9 +340,18 @@
       el.textContent = item.text || 'Texto';
     }
 
-    // Item Action Hover (Delete button)
+    // Item actions shown on hover
     const hoverActions = document.createElement('div');
     hoverActions.className = 'item-actions-hover';
+
+    const btnEdit = document.createElement('button');
+    btnEdit.className = 'btn-item-action btn-item-edit';
+    btnEdit.innerHTML = '&#9998;';
+    btnEdit.title = 'Editar item';
+    btnEdit.onclick = (e) => {
+      e.stopPropagation();
+      openEditItemModal(item);
+    };
 
     const btnDelete = document.createElement('button');
     btnDelete.className = 'btn-item-action';
@@ -352,6 +362,7 @@
       deleteItem(item.id);
     };
 
+    hoverActions.appendChild(btnEdit);
     hoverActions.appendChild(btnDelete);
     el.appendChild(hoverActions);
 
@@ -380,7 +391,10 @@
     });
 
     // Touch Support for Mobile
-    itemEl.addEventListener('touchstart', handleTouchStart, { passive: false });
+    itemEl.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.item-actions-hover')) return;
+      handleTouchStart(e);
+    }, { passive: false });
   }
 
   function attachDropzoneListeners(dropzoneEl) {
@@ -572,28 +586,86 @@
   // ITEM CREATION & IMAGE COMPRESSION
   // ==========================================
 
+  function findItemById(itemId) {
+    const list = getActiveList();
+    const unrankedItem = list.unrankedItems.find(item => item.id === itemId);
+    if (unrankedItem) return unrankedItem;
+
+    for (const row of list.rows) {
+      const rowItem = row.items.find(item => item.id === itemId);
+      if (rowItem) return rowItem;
+    }
+
+    return null;
+  }
+
+  function selectItemTab(tabId) {
+    tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
+    tabContents.forEach(content => content.classList.toggle('active', content.id === tabId));
+  }
+
+  function openNewItemModal() {
+    resetItemForm();
+    document.getElementById('modal-item-title').textContent = 'Adicionar Novo Item ao Tier';
+    btnSaveItem.textContent = 'Adicionar Item';
+    selectItemTab('tab-image');
+    openModal(modalItem);
+  }
+
+  function openEditItemModal(item) {
+    resetItemForm();
+    editingItemId = item.id;
+    document.getElementById('modal-item-title').textContent = 'Editar Item';
+    btnSaveItem.textContent = 'Salvar Alterações';
+
+    if (item.type === 'image') {
+      selectItemTab('tab-image');
+      itemImageUrl.value = item.src || '';
+      itemImageLabel.value = item.label || '';
+    } else {
+      selectItemTab('tab-text');
+      itemTextTitle.value = item.text || '';
+      itemBgColor.value = item.bgColor || '#2a2d3d';
+      itemTextColor.value = item.textColor || '#ffffff';
+      textCardPreview.textContent = item.text || 'Texto de Exemplo';
+      textCardPreview.style.backgroundColor = item.bgColor || '#2a2d3d';
+      textCardPreview.style.color = item.textColor || '#ffffff';
+    }
+
+    openModal(modalItem);
+  }
+
   function handleSaveItem() {
     const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
     const list = getActiveList();
+    const itemBeingEdited = editingItemId ? findItemById(editingItemId) : null;
 
     if (activeTab === 'tab-image') {
       const urlValue = itemImageUrl.value.trim();
       const labelValue = itemImageLabel.value.trim();
 
       if (urlValue) {
-        const newItem = {
-          id: 'item-' + Date.now(),
-          type: 'image',
-          src: urlValue,
-          label: labelValue
-        };
-        list.unrankedItems.push(newItem);
+        if (itemBeingEdited) {
+          itemBeingEdited.type = 'image';
+          itemBeingEdited.src = urlValue;
+          itemBeingEdited.label = labelValue;
+          delete itemBeingEdited.text;
+          delete itemBeingEdited.bgColor;
+          delete itemBeingEdited.textColor;
+        } else {
+          list.unrankedItems.push({
+            id: 'item-' + Date.now(),
+            type: 'image',
+            src: urlValue,
+            label: labelValue
+          });
+        }
         saveState();
         renderApp();
         closeModal(modalItem);
         resetItemForm();
       } else if (itemImageFile.files.length > 0) {
-        processImageFiles(Array.from(itemImageFile.files), labelValue);
+        processImageFiles(itemBeingEdited ? [itemImageFile.files[0]] : Array.from(itemImageFile.files), labelValue, itemBeingEdited);
         closeModal(modalItem);
         resetItemForm();
       } else {
@@ -606,15 +678,22 @@
         return;
       }
 
-      const newItem = {
-        id: 'item-' + Date.now(),
-        type: 'text',
-        text: textValue,
-        bgColor: itemBgColor.value,
-        textColor: itemTextColor.value
-      };
-
-      list.unrankedItems.push(newItem);
+      if (itemBeingEdited) {
+        itemBeingEdited.type = 'text';
+        itemBeingEdited.text = textValue;
+        itemBeingEdited.bgColor = itemBgColor.value;
+        itemBeingEdited.textColor = itemTextColor.value;
+        delete itemBeingEdited.src;
+        delete itemBeingEdited.label;
+      } else {
+        list.unrankedItems.push({
+          id: 'item-' + Date.now(),
+          type: 'text',
+          text: textValue,
+          bgColor: itemBgColor.value,
+          textColor: itemTextColor.value
+        });
+      }
       saveState();
       renderApp();
       closeModal(modalItem);
@@ -623,7 +702,7 @@
   }
 
   // Process uploaded images & downscale to Base64 to save storage space
-  function processImageFiles(files, customLabel) {
+  function processImageFiles(files, customLabel, itemBeingEdited = null) {
     const list = getActiveList();
     let processed = 0;
 
@@ -657,12 +736,21 @@
 
           const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
 
-          list.unrankedItems.push({
-            id: 'item-' + Date.now() + '-' + index,
-            type: 'image',
-            src: compressedBase64,
-            label: customLabel || file.name.replace(/\.[^/.]+$/, "")
-          });
+          if (itemBeingEdited) {
+            itemBeingEdited.type = 'image';
+            itemBeingEdited.src = compressedBase64;
+            itemBeingEdited.label = customLabel || file.name.replace(/\.[^/.]+$/, "");
+            delete itemBeingEdited.text;
+            delete itemBeingEdited.bgColor;
+            delete itemBeingEdited.textColor;
+          } else {
+            list.unrankedItems.push({
+              id: 'item-' + Date.now() + '-' + index,
+              type: 'image',
+              src: compressedBase64,
+              label: customLabel || file.name.replace(/\.[^/.]+$/, "")
+            });
+          }
 
           processed++;
           if (processed === files.length) {
@@ -677,11 +765,14 @@
   }
 
   function resetItemForm() {
+    editingItemId = null;
     itemImageFile.value = '';
     itemImageUrl.value = '';
     itemImageLabel.value = '';
     itemTextTitle.value = '';
     textCardPreview.textContent = 'Texto de Exemplo';
+    textCardPreview.style.backgroundColor = '#2a2d3d';
+    textCardPreview.style.color = '#ffffff';
   }
 
   // ==========================================
@@ -780,7 +871,7 @@
         ctx.fillRect(padding, currentY, boardWidth - (padding * 2), rowHeight);
 
         // Badge Box (Left)
-        const badgeWidth = 140;
+        const badgeWidth = 280;
         ctx.fillStyle = row.color || '#718093';
         ctx.fillRect(padding, currentY, badgeWidth, rowHeight);
 
@@ -922,16 +1013,13 @@
     });
 
     btnAddRow.addEventListener('click', addNewRow);
-    btnOpenAddItemModal.addEventListener('click', () => openModal(modalItem));
+    btnOpenAddItemModal.addEventListener('click', openNewItemModal);
     searchItemsInput.addEventListener('input', () => renderUnrankedItems(getActiveList()));
 
     // Tabs inside Add Item Modal
     tabButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        tabButtons.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.tab).classList.add('active');
+        selectItemTab(btn.dataset.tab);
       });
     });
 

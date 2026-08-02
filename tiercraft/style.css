@@ -222,7 +222,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid rgba(255, 255, 255, 0.05);
   flex: 1;
   min-height: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .tier-board::-webkit-scrollbar {
@@ -237,7 +238,7 @@ h1, h2, h3, h4, h5, h6 {
 .tier-row {
   display: flex;
   flex: 1;
-  min-height: 48px;
+  min-height: 68px;
   border-radius: 6px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.02);
@@ -253,8 +254,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Tier Label / Badge (Left) */
 .tier-badge-container {
-  width: 100px;
-  min-width: 100px;
+  width: 200px;
+  min-width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,10 +319,11 @@ h1, h2, h3, h4, h5, h6 {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
   align-content: flex-start;
   gap: 4px;
   padding: 4px;
-  min-height: 48px;
+  min-height: 68px;
   background: rgba(0, 0, 0, 0.15);
   overflow-y: auto;
 }
@@ -339,7 +341,8 @@ h1, h2, h3, h4, h5, h6 {
 .tier-item {
   min-width: 68px;
   width: auto;
-  height: 60px;
+  min-height: 60px;
+  height: auto;
   border-radius: var(--radius-sm);
   background: var(--bg-card-hover);
   border: 1px solid var(--border-color);
@@ -369,7 +372,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .tier-item img {
   width: 68px;
-  height: 60px;
+  height: 100%;
   object-fit: cover;
   pointer-events: none;
 }
@@ -435,6 +438,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-item-action:hover {
   background: #ef4444;
+}
+
+.btn-item-edit:hover {
+  background: var(--accent-primary);
 }
 
 /* Items Bank / Drawer Section */
@@ -592,15 +599,29 @@ body.focus-mode .app-header {
 body.focus-mode .app-main {
   height: 100vh;
   max-width: 100%;
-  padding: 12px;
+  padding: 8px;
+  gap: 8px;
 }
 
 body.focus-mode .board-actions,
+body.focus-mode .tierlist-info,
+body.focus-mode .bank-header,
 body.focus-mode .tier-row-controls,
 body.focus-mode .item-actions-hover,
 body.focus-mode .search-box,
 body.focus-mode #btn-open-add-item-modal {
   display: none !important;
+}
+
+body.focus-mode .tierlist-container {
+  flex: 3;
+  padding: 8px;
+}
+
+body.focus-mode .items-bank-section {
+  flex: 1;
+  min-height: 96px;
+  padding: 8px;
 }
 
 body.focus-mode .editable-title,
@@ -1012,8 +1033,8 @@ input[type="color"]::-webkit-color-swatch {
   }
 
   .tier-badge-container {
-    width: 85px;
-    min-width: 85px;
+    width: 170px;
+    min-width: 170px;
     padding: 6px;
   }
 
@@ -1023,7 +1044,8 @@ input[type="color"]::-webkit-color-swatch {
 
   .tier-item {
     width: 58px;
-    height: 58px;
+    min-height: 58px;
+    height: auto;
   }
 
   .backup-actions-grid {
