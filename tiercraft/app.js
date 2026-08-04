@@ -35,6 +35,19 @@
     empty: []
   };
 
+  // Effects are provided locally: bundled assets or sounds synthesized in the browser.
+  const SOUND_LIBRARY = {
+    swoosh: { label: 'Swoosh', src: 'assets/sounds/swoosh.mp3' },
+    pop: { label: 'Pop', synth: true },
+    achievement: { label: 'Achievement', synth: true },
+    sparkle: { label: 'Sparkle', synth: true },
+    impact: { label: 'Impact', synth: true },
+    fail: { label: 'Fail', synth: true },
+    applause: { label: 'Applause', synth: true }
+  };
+
+  let audioContext = null;
+
   // State
   let state = {
     activeTierListId: 'default',
@@ -73,6 +86,7 @@
   const tierListTitle = document.getElementById('tierlist-title');
   const tierListDesc = document.getElementById('tierlist-desc');
   const btnAddRow = document.getElementById('btn-add-row');
+  const btnSoundSettings = document.getElementById('btn-sound-settings');
   const tierRowsBoard = document.getElementById('tier-rows-board');
 
   const unrankedItemsContainer = document.getElementById('unranked-items-container');
@@ -86,6 +100,7 @@
   const modalRow = document.getElementById('modal-row');
   const modalBackup = document.getElementById('modal-backup');
   const modalNewList = document.getElementById('modal-new-list');
+  const modalSoundSettings = document.getElementById('modal-sound-settings');
 
   // Item Form Elements
   const tabButtons = document.querySelectorAll('.tab-btn');
@@ -107,6 +122,12 @@
   const colorDots = document.querySelectorAll('.color-dot');
   const btnSaveRow = document.getElementById('btn-save-row');
   const btnDeleteRow = document.getElementById('btn-delete-row');
+  const rowSoundSelect = document.getElementById('row-sound-select');
+  const btnPreviewRowSound = document.getElementById('btn-preview-row-sound');
+
+  const listDefaultSound = document.getElementById('list-default-sound');
+  const btnPreviewDefaultSound = document.getElementById('btn-preview-default-sound');
+  const btnSaveSoundSettings = document.getElementById('btn-save-sound-settings');
 
   // New List Form Elements
   const newListTitle = document.getElementById('new-list-title');
@@ -188,6 +209,12 @@
 
     if (!list.unrankedItems || !Array.isArray(list.unrankedItems)) {
       list.unrankedItems = [];
+      saveState();
+    }
+
+    // Migrate saved Tier Lists created before sound effects existed.
+    if (typeof list.defaultSoundId === 'undefined') {
+      list.defaultSoundId = 'swoosh';
       saveState();
     }
 
@@ -513,6 +540,7 @@
       const targetRow = list.rows.find(r => r.id === targetRowId);
       if (targetRow) {
         targetRow.items.push(foundItem);
+        playRowSound(targetRow, list);
       } else {
         list.unrankedItems.push(foundItem);
       }
@@ -520,6 +548,96 @@
 
     saveState();
     renderApp();
+  }
+
+  function getSoundIdForRow(row, list) {
+    return row.soundId && row.soundId !== 'default' ? row.soundId : list.defaultSoundId;
+  }
+
+  function playSound(soundId) {
+    const sound = SOUND_LIBRARY[soundId];
+    if (!sound) return;
+
+    if (sound.src) {
+      const audio = new Audio(sound.src);
+      audio.volume = 0.7;
+      audio.play().catch(() => {
+        // A browser can block sound when it no longer considers the drop a user gesture.
+      });
+      return;
+    }
+
+    playSynthSound(soundId);
+  }
+
+  function getAudioContext() {
+    if (!audioContext) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return null;
+      audioContext = new AudioContextClass();
+    }
+    if (audioContext.state === 'suspended') audioContext.resume();
+    return audioContext;
+  }
+
+  function playTone(context, time, frequency, duration, type = 'sine', volume = 0.08, endFrequency = frequency) {
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.type = type;
+    oscillator.frequency.setValueAtTime(frequency, time);
+    oscillator.frequency.exponentialRampToValueAtTime(Math.max(1, endFrequency), time + duration);
+    gain.gain.setValueAtTime(0.0001, time);
+    gain.gain.exponentialRampToValueAtTime(volume, time + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+    oscillator.connect(gain).connect(context.destination);
+    oscillator.start(time);
+    oscillator.stop(time + duration + 0.02);
+  }
+
+  function playNoise(context, time, duration, volume = 0.05) {
+    const buffer = context.createBuffer(1, Math.ceil(context.sampleRate * duration), context.sampleRate);
+    const samples = buffer.getChannelData(0);
+    for (let index = 0; index < samples.length; index += 1) samples[index] = Math.random() * 2 - 1;
+
+    const source = context.createBufferSource();
+    const gain = context.createGain();
+    gain.gain.setValueAtTime(volume, time);
+    gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+    source.buffer = buffer;
+    source.connect(gain).connect(context.destination);
+    source.start(time);
+  }
+
+  function playSynthSound(soundId) {
+    const context = getAudioContext();
+    if (!context) return;
+    const time = context.currentTime;
+
+    switch (soundId) {
+      case 'pop':
+        playTone(context, time, 700, 0.13, 'sine', 0.09, 460);
+        break;
+      case 'achievement':
+        [523, 659, 784].forEach((frequency, index) => playTone(context, time + index * 0.09, frequency, 0.16, 'triangle', 0.07));
+        break;
+      case 'sparkle':
+        [1320, 1760, 2093].forEach((frequency, index) => playTone(context, time + index * 0.06, frequency, 0.12, 'sine', 0.045, frequency * 1.15));
+        break;
+      case 'impact':
+        playTone(context, time, 180, 0.25, 'triangle', 0.13, 58);
+        playNoise(context, time, 0.08, 0.025);
+        break;
+      case 'fail':
+        [430, 340, 255].forEach((frequency, index) => playTone(context, time + index * 0.1, frequency, 0.15, 'sawtooth', 0.05, frequency * 0.82));
+        break;
+      case 'applause':
+        [0, 0.07, 0.14, 0.22, 0.3].forEach(offset => playNoise(context, time + offset, 0.09, 0.05));
+        break;
+    }
+  }
+
+  function playRowSound(row, list = getActiveList()) {
+    playSound(getSoundIdForRow(row, list));
   }
 
   function deleteItem(itemId) {
@@ -553,6 +671,9 @@
     editRowId.value = row.id;
     rowLabelInput.value = row.label;
     rowCustomColor.value = row.color;
+    if (rowSoundSelect) {
+      rowSoundSelect.value = row.soundId || 'default';
+    }
 
     colorDots.forEach(dot => {
       if (dot.dataset.color.toLowerCase() === row.color.toLowerCase()) {
@@ -575,6 +696,7 @@
       id: newRowId,
       label: 'NOVO',
       color: randomColor,
+      soundId: 'default',
       items: []
     });
 
@@ -1013,6 +1135,12 @@
     });
 
     btnAddRow.addEventListener('click', addNewRow);
+    if (btnSoundSettings && listDefaultSound && modalSoundSettings) {
+      btnSoundSettings.addEventListener('click', () => {
+        listDefaultSound.value = getActiveList().defaultSoundId || 'none';
+        openModal(modalSoundSettings);
+      });
+    }
     btnOpenAddItemModal.addEventListener('click', openNewItemModal);
     searchItemsInput.addEventListener('input', () => renderUnrankedItems(getActiveList()));
 
@@ -1072,11 +1200,32 @@
       if (row) {
         row.label = rowLabelInput.value.trim() || 'TIER';
         row.color = rowCustomColor.value;
+        if (rowSoundSelect) row.soundId = rowSoundSelect.value;
         saveState();
         renderApp();
         closeModal(modalRow);
       }
     });
+
+    if (btnPreviewRowSound && rowSoundSelect) {
+      btnPreviewRowSound.addEventListener('click', () => {
+        const list = getActiveList();
+        const soundId = rowSoundSelect.value === 'default' ? list.defaultSoundId : rowSoundSelect.value;
+        playSound(soundId);
+      });
+    }
+
+    if (btnPreviewDefaultSound && listDefaultSound) {
+      btnPreviewDefaultSound.addEventListener('click', () => playSound(listDefaultSound.value));
+    }
+
+    if (btnSaveSoundSettings && listDefaultSound && modalSoundSettings) {
+      btnSaveSoundSettings.addEventListener('click', () => {
+        getActiveList().defaultSoundId = listDefaultSound.value;
+        saveState();
+        closeModal(modalSoundSettings);
+      });
+    }
 
     btnDeleteRow.addEventListener('click', () => {
       const list = getActiveList();

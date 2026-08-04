@@ -71,6 +71,10 @@
           <p id="tierlist-desc" class="editable-desc" contenteditable="true" spellcheck="false" title="Clique para editar a descrição">Clique nos títulos ou descrições para personalizar. Arraste itens para as fileiras.</p>
         </div>
         <div class="board-actions">
+          <button id="btn-sound-settings" class="btn btn-secondary btn-sm" title="Configurar efeitos sonoros">
+            <span aria-hidden="true">🔊</span>
+            Sons
+          </button>
           <button id="btn-add-row" class="btn btn-primary btn-sm">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             Nova Fileira
@@ -184,6 +188,38 @@
     </div>
   </div>
 
+  <!-- MODAL: Efeitos Sonoros da Tier List -->
+  <div id="modal-sound-settings" class="modal-backdrop">
+    <div class="modal-card modal-sm">
+      <div class="modal-header">
+        <h3>Efeitos sonoros</h3>
+        <button class="modal-close" data-close="modal-sound-settings">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-subtitle">Este efeito toca ao soltar um card em uma fileira que usa o efeito padrão.</p>
+        <div class="form-group">
+          <label for="list-default-sound">Efeito padrão da Tier List</label>
+          <div class="sound-control-row">
+            <select id="list-default-sound">
+              <option value="none">Sem efeito sonoro</option>
+              <option value="swoosh">Swoosh</option>
+              <option value="pop">Pop</option>
+              <option value="achievement">Achievement</option>
+              <option value="sparkle">Sparkle</option>
+              <option value="impact">Impact</option>
+              <option value="fail">Fail</option>
+              <option value="applause">Applause</option>
+            </select>
+            <button type="button" id="btn-preview-default-sound" class="btn btn-secondary btn-sm">Prévia</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-save-sound-settings" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: Editar Fileira / Tier Row -->
   <div id="modal-row" class="modal-backdrop">
     <div class="modal-card modal-sm">
@@ -213,6 +249,23 @@
           <div class="form-row margin-top-sm">
             <label for="row-custom-color" class="text-sm">Cor personalizada:</label>
             <input type="color" id="row-custom-color" value="#ff4757">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="row-sound-select">Efeito ao inserir card</label>
+          <div class="sound-control-row">
+            <select id="row-sound-select">
+              <option value="default">Usar efeito padrão</option>
+              <option value="none">Sem efeito sonoro</option>
+              <option value="swoosh">Swoosh</option>
+              <option value="pop">Pop</option>
+              <option value="achievement">Achievement</option>
+              <option value="sparkle">Sparkle</option>
+              <option value="impact">Impact</option>
+              <option value="fail">Fail</option>
+              <option value="applause">Applause</option>
+            </select>
+            <button type="button" id="btn-preview-row-sound" class="btn btn-secondary btn-sm">Prévia</button>
           </div>
         </div>
       </div>
