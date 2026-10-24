@@ -1,158 +1,56 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0a0d14">
-  <meta name="description" content="Tecnologia para Humanos — Matheus Godoy.">
-  <title>Matheus Godoy — Tecnologia para Seres Humanos</title>
-
-  <link rel="icon" type="image/png" sizes="96x96" href="./favicon/favicon-96x96.png">
-  <link rel="icon" href="./favicon/favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-
-  <style>
-    :root {
-      color-scheme: dark;
-      --page: #0a0d14;
-      --card: #131925;
-      --line: #293348;
-      --text: #f5f7fb;
-      --muted: #9ba8be;
-      --accent: #72a6ff;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { min-height: 100%; }
-
-    body {
-      min-height: 100vh;
-      min-height: 100svh;
-      margin: 0;
-      padding: 28px 20px;
-      display: grid;
-      place-items: center;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      background: var(--page);
-    }
-
-    main {
-      width: 100%;
-      max-width: 440px;
-      text-align: center;
-    }
-
-    .avatar {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 24px;
-      overflow: hidden;
-      border: 2px solid var(--line);
-      border-radius: 50%;
-      background: #101622;
-    }
-
-    .avatar img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      border-radius: inherit;
-    }
-
-    h1 {
-      max-width: 12ch;
-      margin: 0 auto;
-      font-size: clamp(2rem, 10vw, 2.8rem);
-      line-height: 1.03;
-      letter-spacing: -.055em;
-      font-weight: 800;
-      text-wrap: balance;
-    }
-
-    .name {
-      margin: 12px 0 32px;
-      color: var(--muted);
-      font-size: .88rem;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    nav { display: grid; gap: 12px; }
-
-    .link {
-      min-height: 60px;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      color: var(--text);
-      background: var(--card);
-      font-size: .94rem;
-      font-weight: 750;
-      letter-spacing: .08em;
-      text-decoration: none;
-      transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
-    }
-
-    .link:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-      background: #182238;
-    }
-
-    .link:active { transform: translateY(0); }
-
-    .link:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    .link--primary {
-      border-color: #ffffff;
-      background: #ffffff;
-      color: #101722;
-    }
-
-    .link--primary:hover {
-      border-color: #e5eaf2;
-      background: #e5eaf2;
-    }
-
-    @media (min-width: 600px) {
-      body { padding: 48px 24px; }
-      .avatar { width: 144px; height: 144px; margin-bottom: 28px; }
-      .name { margin-bottom: 36px; }
-      .link { min-height: 64px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .link { transition: none; }
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#111318">
+<title>Matheus Godoy — Funcionários Digitais 7x7</title>
+<meta name="description" content="Tecnologia que multiplica a capacidade das pessoas. Conheça o Captador 7x7: recebe, qualifica e encaminha oportunidades para seu WhatsApp. Implantação por R$ 500.">
+<link rel="canonical" href="https://matheusgodoy.com/">
+<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:title" content="Matheus Godoy — Funcionários Digitais 7x7"><meta property="og:description" content="Mais produtividade. Menos trabalho repetitivo. Conheça seu primeiro funcionário digital: o Captador 7x7."><meta property="og:url" content="https://matheusgodoy.com/"><meta property="og:image" content="https://matheusgodoy.com/avatar.jpg"><meta property="og:image:alt" content="Retrato de Matheus Godoy"><meta name="twitter:card" content="summary">
+<link rel="icon" href="./favicon/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="96x96" href="./favicon/favicon-96x96.png"><link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png">
+<link rel="stylesheet" href="./styles.css"><script type="module" src="./app.js"></script>
 </head>
-
 <body>
-  <main>
-    <div class="avatar">
-      <img src="./avatar.jpg" width="640" height="640" alt="Foto de Matheus Godoy">
-    </div>
-
-    <h1>Tecnologia para Seres Humanos</h1>
-    <p class="name">Matheus Godoy</p>
-
-    <nav aria-label="Links principais">
-      <a class="link link--primary" href="/links">PRODUTOS QUE RECOMENDO</a>
-      <a class="link" href="mailto:matheusgodoy@me.com">FALE COMIGO</a>
-      <!-- <a class="link" href="/tiercraft">CRIADOR DE TIERLISTS</a> -->
-      <!-- <a class="link" href="/mindmap">CRIADOR DE MINDMAPS</a> -->
-    </nav>
-  </main>
+<a class="skip-link" href="#porque">Ir para o conteúdo</a>
+<main>
+<section class="chapter hero" id="porque" aria-labelledby="hero-title">
+<p class="wordmark reveal">MATHEUS GODOY<span class="signature-dot" aria-hidden="true"></span></p>
+<div class="portrait reveal"><img src="./assets/matheus-godoy.webp" width="480" height="480" alt="Matheus Godoy" fetchpriority="high"></div>
+<h1 id="hero-title" class="reveal">E se sua empresa pudesse <em>fazer mais,</em> sem precisar de mais funcionários?</h1>
+<div class="prose reveal"><p>Crio funcionários digitais que trabalham 7 dias por semana, assumindo tarefas que não precisam ocupar o tempo da sua equipe.</p></div>
+<p class="closing reveal">Mais produtividade.<br><span>Menos trabalho repetitivo.</span></p><span class="scroll-line" aria-hidden="true"></span>
+</section>
+<section class="chapter how" id="como" aria-labelledby="how-title">
+<h2 id="how-title" class="schedule-title reveal">Sua equipe trabalha <span class="five">5x2.</span><br>Seus funcionários digitais, <strong>7x7.</strong></h2>
+<div class="week reveal" aria-label="Disponíveis de segunda a domingo"><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span><span>DOM</span></div>
+<div class="prose reveal"><p>Desenvolvo soluções digitais que assumem tarefas específicas do seu negócio, de forma automática, mesmo quando sua equipe não está trabalhando.</p></div>
+<p class="closing reveal">Sua equipe ganha tempo.<br><span>Sua empresa ganha capacidade.</span></p>
+</section>
+<section class="chapter product" id="o-que" aria-labelledby="product-title">
+<h2 id="product-title" class="product-title reveal">Conheça o<br>Captador <em>7x7.</em></h2>
+<p class="lead reveal">Seu funcionário digital que recebe, qualifica e encaminha oportunidades comerciais, todos os dias.</p>
+<div class="prose reveal"><p>Enquanto você cuida do seu negócio, o Captador 7x7 apresenta seus serviços, faz as primeiras perguntas aos interessados e prepara solicitações de orçamento para o seu WhatsApp.</p><p>O empresário continua responsável pelo atendimento, negociação e fechamento.</p></div>
+<figure class="demo reveal" aria-labelledby="demo-caption">
+<div class="demo-top"><span>O CAPTADOR EM AÇÃO</span><span>DEMONSTRAÇÃO FICTÍCIA</span></div>
+<div class="browser"><div class="browser-bar"><span class="browser-dots" aria-hidden="true">● ● ●</span><span>ClimaPrime / demonstração</span><span aria-hidden="true">↗</span></div>
+<div class="demo-stage" id="demo-stage"><div class="demo-page" id="demo-page">
+<p class="clima-brand build-piece">ClimaPrime<span>CLIMATIZAÇÃO</span></p>
+<h3 class="build-piece">O clima ideal.<br>O cuidado que você merece.</h3>
+<div class="ac-image build-piece" role="img" aria-label="Ilustração de um aparelho de ar-condicionado"><div class="ac-unit"><i></i><b></b></div><div class="air-lines"><i></i><i></i><i></i></div></div>
+<p class="demo-services build-piece">Instalação · Manutenção · Higienização</p>
+<span class="mock-button build-piece" id="mock-budget">SOLICITAR ORÇAMENTO <span>↗</span></span></div>
+<div class="demo-panel" id="demo-panel" hidden></div><div class="demo-cursor" id="demo-cursor" aria-hidden="true"></div></div></div>
+<div class="demo-controls"><p id="demo-status" role="status">Uma página. Uma solicitação. Uma oportunidade.</p><button type="button" id="demo-pause" disabled>Pausar</button></div>
+<figcaption id="demo-caption">Seu próximo atendimento começa antes da primeira conversa.</figcaption>
+<button class="text-button" type="button" id="demo-replay">ASSISTIR NOVAMENTE <span aria-hidden="true">↻</span></button>
+<noscript><p>A demonstração animada requer JavaScript. O Captador apresenta a empresa, coleta serviço, local e prazo e organiza uma mensagem que o visitante confirma no WhatsApp.</p></noscript>
+</figure>
+<div class="scope reveal" aria-labelledby="included-title"><p class="eyebrow">DO PRIMEIRO ACESSO À PRIMEIRA CONVERSA</p><h3 id="included-title">O que você recebe.</h3>
+<p class="list-label">INCLUÍDO</p><ul class="editorial-list included"><li>Página profissional personalizada.</li><li>Apresentação dos serviços da empresa.</li><li>Experiência de pré-qualificação de interessados.</li><li>Perguntas adaptadas ao negócio.</li><li>Organização das respostas.</li><li>Encaminhamento para WhatsApp com mensagem preenchida.</li><li>Design responsivo.</li><li>Publicação em hospedagem estática gratuita, dentro dos limites do provedor.</li><li>Entrega em até 48 horas após o recebimento das informações necessárias.</li></ul>
+<p class="list-label excluded-label">NÃO INCLUÍDO</p><ul class="editorial-list excluded"><li>Domínio próprio.</li><li>Hospedagem paga.</li><li>Investimento em anúncios.</li><li>Gestão de campanhas publicitárias.</li><li>Atendimento automático dentro do WhatsApp.</li><li>Inteligência artificial conversacional.</li><li>Garantia de visitantes, contatos ou vendas.</li><li>Manutenção contínua.</li></ul><p class="fine-print">O envio da mensagem depende da confirmação do visitante no WhatsApp.</p></div>
+<div class="investment reveal" aria-labelledby="price-title"><p class="eyebrow" id="price-title">CAPTADOR 7x7 / IMPLANTAÇÃO</p><p class="price"><span>R$</span> 500</p><p class="payment">Pagamento único.</p><p class="prose">A implantação inclui o desenvolvimento e a publicação da solução conforme o escopo apresentado.</p><div class="optional"><p class="eyebrow">SERVIÇO OPCIONAL</p><p>Gestão de campanhas para atrair visitantes qualificados.</p><p class="consult">Sob consulta.</p><p class="fine-print">O investimento em anúncios é separado e pago pelo cliente.</p></div></div>
+<div class="contact reveal"><h3>Pronto para colocar seu primeiro funcionário digital <em>para trabalhar?</em></h3><a class="commercial-cta" id="whatsapp-cta" href="https://wa.me/5516982650942?text=Ol%C3%A1%2C%20Matheus!%20Conheci%20o%20Captador%207x7%20no%20seu%20site%2C%20entendi%20o%20que%20est%C3%A1%20inclu%C3%ADdo%20na%20implanta%C3%A7%C3%A3o%20de%20R%24%20500%20e%20gostaria%20de%20conversar%20sobre%20a%20contrata%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer">QUERO MEU CAPTADOR 7x7 <span aria-hidden="true">→</span></a><p>Você fala diretamente comigo.</p></div>
+</section>
+</main>
+<footer><p class="wordmark">MATHEUS GODOY</p><p>Tecnologia que multiplica a capacidade das pessoas.</p><p class="copyright">© 2026 Matheus Godoy.</p></footer>
 </body>
 </html>
