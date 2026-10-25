@@ -10,7 +10,7 @@
     { key: 'property', title: 'Onde será o atendimento?', hint: 'Assim entendemos melhor o seu ambiente.', options: ['Residencial', 'Comercial'] },
     { key: 'location', title: 'Em qual região você está?', hint: 'Informe apenas cidade e bairro. Não precisamos do endereço completo.' },
     { key: 'urgency', title: 'Para quando você precisa?', hint: 'Essa preferência não confirma disponibilidade ou agendamento.', options: ['O quanto antes', 'Nos próximos dias', 'Estou apenas pesquisando'] },
-    { key: 'name', title: 'Como podemos chamar você?', hint: 'Use um nome fictício para testar a demonstração.' }
+    { key: 'name', title: 'Como podemos chamar você?', hint: 'Informe seu nome para personalizar o atendimento.' }
   ];
   let step = 0;
   function render(focus = false) {
@@ -77,7 +77,7 @@
       const row = document.createElement('div'); const dt = document.createElement('dt'); const dd = document.createElement('dd');
       dt.textContent = label; dd.textContent = value; row.append(dt, dd); summary.append(row);
     });
-    const message = `Olá! Estou testando a demonstração fictícia da ClimaPrime.\n\nMeu nome é ${answers.name}. Gostaria de solicitar um orçamento:\n• Serviço: ${answers.service}\n• Ambiente: ${answers.property}\n• Cidade: ${answers.city}\n• Bairro: ${answers.neighborhood}\n• Urgência: ${answers.urgency}\n\nEntendo que esta é uma demonstração, sem contratação ou agendamento real.`;
+    const message = `Olá, ClimaPrime!\n\nMeu nome é ${answers.name}. Gostaria de solicitar um orçamento:\n• Serviço: ${answers.service}\n• Ambiente: ${answers.property}\n• Cidade: ${answers.city}\n• Bairro: ${answers.neighborhood}\n• Urgência: ${answers.urgency}`;
     document.querySelector('#message').value = message;
     const number = window.CLIMAPRIME_CONFIG?.whatsappNumber;
     const valid = typeof number === 'string' && /^[1-9]\d{7,14}$/.test(number);
@@ -85,8 +85,8 @@
     link.hidden = !valid; link.removeAttribute('href');
     if (valid) link.href = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
     document.querySelector('#whatsapp-status').textContent = valid
-      ? 'WhatsApp de demonstração configurado. O botão abre uma nova aba; você confirma o envio no aplicativo.'
-      : 'Modo demonstração: nenhum WhatsApp válido foi configurado. Você pode copiar a mensagem abaixo, sem enviar.';
+      ? 'Confira seu pedido e confirme o envio no WhatsApp.'
+      : 'O WhatsApp está indisponível no momento. Você pode copiar seu pedido.';
     document.querySelector('#copy-status').textContent = '';
     document.querySelector('#result-title').focus();
   }
