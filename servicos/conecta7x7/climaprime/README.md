@@ -15,3 +15,5 @@ Depoimentos e personagens são explicitamente ilustrativos. Não representam exp
 Verificação realizada em 320, 375, 768 e 1440 pixels, com fluxo completo sem crypto, validação de cidade/bairro, movimento reduzido, reinício, payload, mensagem de WhatsApp e falha/retentativa/sucesso simulados no webhook. Nenhum registro fictício foi enviado ao Make.
 
 O botão Enviar e abrir WhatsApp abre a mensagem e envia os dados ao webhook no mesmo clique, sem aguardar a resposta HTTP para abrir o aplicativo. Falhas no webhook permitem repetir apenas o registro, sem abrir outra conversa. Navegadores que bloqueiam a nova aba recebem um link de recuperação. O envio da mensagem é confirmado pelo visitante dentro do WhatsApp.
+
+A ilustração do hero foi integrada como SVG inline e animada por `assets/climaprime.css`: fluxo de ar, partículas, indicador, luz ambiente, planta e etiquetas. `assets/climate-art.js` interrompe a animação fora da tela ou com aba oculta. Movimento reduzido mostra a cena estática. Os textos de apoio e avisos longos solicitados foram removidos; os cards ainda identificam os relatos como ilustrativos.
