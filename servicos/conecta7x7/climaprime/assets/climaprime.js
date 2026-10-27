@@ -25,7 +25,7 @@ const questions = [
 ];
 const form = $('#chat-form'), input = $('#answer'), heading = $('#chat-question');
 const context = $('#chat-context'), actions = $('#chat-actions'), status = $('#chat-status'), restart = $('#restart');
-let step = 0, data = {}, transcript = [], sending = false, sent = false, controller;
+let step = 0, data = {}, transcript = [], sending = false, sent = false, whatsappOpened = false, controller;
 function requestId() {
   const bytes = new Uint8Array(16);
   if (typeof globalThis.crypto?.getRandomValues === 'function') globalThis.crypto.getRandomValues(bytes);
@@ -76,46 +76,66 @@ function button(text, handler, primary = true) {
 function summary() {
   return `Nome: ${data.name}\nServiço: ${data.service}\nAmbiente: ${data.property}\nCidade: ${data.city}\nBairro: ${data.neighborhood}\nPreferência de prazo: ${data.urgency}`;
 }
-function whatsappLink() {
+function whatsappUrl() {
   const message = `Olá, ClimaPrime! Gostaria de solicitar um orçamento.\n\n${summary()}`;
+  return `https://wa.me/${CONECTA_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+}
+function openWhatsApp() {
+  // Open synchronously during the click, before awaiting the webhook response.
+  // A neutral tab lets us clear opener while retaining popup-block detection.
+  let tab;
+  try {
+    tab = window.open('about:blank', '_blank');
+    if (!tab) return false;
+    tab.opener = null;
+    tab.location.replace(whatsappUrl());
+    return true;
+  } catch {
+    if (tab) tab.close();
+    return false;
+  }
+}
+function whatsappFallback() {
+  if (whatsappOpened) return;
   const link = document.createElement('a'); link.className = 'button';
-  link.textContent = 'Continuar no WhatsApp ↗'; link.href = `https://wa.me/${CONECTA_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  link.textContent = 'Abrir WhatsApp ↗'; link.href = whatsappUrl();
   link.target = '_blank'; link.rel = 'noopener noreferrer';
   actions.append(link);
 }
 function review() {
   form.hidden = true; actions.replaceChildren(); $('#progress').textContent = 'REVISE E CONFIRME';
   present('Vamos conferir seu orçamento?', summary());
-  status.textContent = 'Ao confirmar, suas respostas serão enviadas ao responsável por esta demonstração. Depois, continue no WhatsApp com seu pedido pronto. O agendamento será combinado no atendimento.';
-  button('Confirmar e enviar solicitação ↗', send);
+  status.textContent = 'Ao confirmar, seu pedido será registrado e o WhatsApp abrirá com a mensagem pronta. Confirme o envio no aplicativo. O agendamento será combinado no atendimento.';
+  button('Enviar e abrir WhatsApp ↗', () => send(true));
   button('Corrigir minhas respostas', () => reset(), false);
 }
-async function send() {
+async function send(launchWhatsApp = true) {
   if (sending || sent) return;
   sending = true; restart.disabled = true;
+  if (launchWhatsApp && !whatsappOpened) whatsappOpened = openWhatsApp();
   actions.querySelectorAll('button').forEach(element => element.disabled = true);
-  status.textContent = 'Enviando suas respostas…'; controller = new AbortController();
+  status.textContent = whatsappOpened ? 'WhatsApp aberto. Registrando suas respostas…' : 'Registrando suas respostas…'; controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
   try {
     const response = await fetch(CONECTA_CONFIG.webhookUrl, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
+      method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
       body: JSON.stringify({ ...data, source: 'matheusgodoy.com', page: '/servicos/conecta7x7/climaprime/index.html', conecta: true, climaprime: true, company: 'ClimaPrime', transcript, consent: true, submittedAt: new Date().toISOString() }),
     });
     if (!response.ok) throw new Error('Solicitação recusada');
-    sent = true; actions.replaceChildren(); $('#progress').textContent = 'PRÓXIMO PASSO · WHATSAPP';
-    present('Seu pedido está pronto.', 'Recebemos suas respostas. Abra o WhatsApp para continuar o atendimento e combinar os detalhes do serviço. A solicitação não confirma agendamento.');
-    whatsappLink();
-    status.textContent = 'O site recebeu sua solicitação. O envio da mensagem no WhatsApp depende da sua confirmação no aplicativo.';
+    sent = true; actions.replaceChildren(); $('#progress').textContent = 'SOLICITAÇÃO RECEBIDA';
+    present('Seu pedido foi recebido.', whatsappOpened ? 'O WhatsApp foi aberto com sua mensagem pronta. Confirme o envio no aplicativo para continuar o atendimento. A solicitação não confirma agendamento.' : 'Seu navegador bloqueou a abertura automática do WhatsApp. Use o botão abaixo para abrir a mensagem pronta.');
+    whatsappFallback();
+    status.textContent = 'Recebimento no site confirmado. O envio da mensagem no WhatsApp depende da sua confirmação no aplicativo.';
   } catch {
     actions.replaceChildren();
-    present('Vamos tentar mais uma vez?', `Não consegui confirmar o recebimento no site. Suas respostas continuam aqui. Você pode tentar novamente ou continuar pelo WhatsApp.\n\n${summary()}`);
-    button('Tentar enviar novamente ↗', send); whatsappLink();
+    present('Vamos tentar mais uma vez?', `${whatsappOpened ? 'O WhatsApp foi aberto, mas não consegui confirmar o registro no site. Tente registrar novamente sem abrir outra conversa.' : 'Não consegui confirmar o registro no site. Você pode tentar novamente e usar o botão abaixo para abrir o WhatsApp.'}\n\n${summary()}`);
+    button('Tentar registrar novamente ↗', () => send(false)); whatsappFallback();
     status.textContent = 'O recebimento pelo site ainda não foi confirmado.';
   } finally { clearTimeout(timeout); sending = false; restart.disabled = false; }
 }
 function reset(interactive = true) {
   if (sending) return;
-  step = 0; sent = false; transcript = []; data = { requestId: requestId() };
+  step = 0; sent = false; whatsappOpened = false; transcript = []; data = { requestId: requestId() };
   status.textContent = 'Você revisa o pedido antes de enviar. O agendamento será combinado no atendimento.';
   ask(interactive);
 }

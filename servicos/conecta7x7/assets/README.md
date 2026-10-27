@@ -10,7 +10,7 @@ O destino da demonstração é o WhatsApp de Matheus (`CONECTA_CONFIG.whatsappNu
 
 O POST JSON inclui `conecta: true`, `page: "/servicos/conecta7x7/index.html"`, `source`, `service`, `requestId`, `name`, `contact`, `employees`, `transcript`, `consent` e `submittedAt`. Ele só acontece após a confirmação. O cenário do Make pode usar `conecta` para distinguir esta origem. Deduplicar pelo `requestId` evita duplicatas em tentativas após falhas.
 
-Depois do recebimento HTTP 2xx, o visitante pode abrir o WhatsApp com todas as respostas preenchidas. Ele precisa confirmar o envio no aplicativo. A página não usa a API de envio automático do WhatsApp. Em caso de erro no webhook, permite tentar novamente ou continuar pelo WhatsApp, informando que o recebimento pelo site não foi confirmado.
+O botão Enviar e abrir WhatsApp inicia as duas ações no mesmo clique: abre o WhatsApp com as respostas preenchidas e envia o POST ao webhook. A abertura ocorre antes de aguardar a resposta HTTP, durante o gesto do usuário. O visitante confirma o envio no aplicativo; não há envio automático pela API do WhatsApp. Se o webhook falhar, a retentativa repete apenas o POST, preservando requestId e sem abrir outra conversa. Se o navegador bloquear a nova aba, é exibido um link de recuperação para abrir o WhatsApp. O fetch usa keepalive para permitir a conclusão quando a página vai para segundo plano.
 
 Os depoimentos são exemplos explicitamente identificados como ilustrativos. Substitua por relatos reais autorizados antes de usá-los como prova social de clientes. A animação ocorre uma vez ao entrar na tela; movimento reduzido mostra o conteúdo sem animação.
 

@@ -13,3 +13,5 @@ O destino do WhatsApp permanece o número de demonstração já configurado na p
 Depoimentos e personagens são explicitamente ilustrativos. Não representam experiências verificadas. A página mantém `noindex, nofollow` por ser uma demonstração.
 
 Verificação realizada em 320, 375, 768 e 1440 pixels, com fluxo completo sem crypto, validação de cidade/bairro, movimento reduzido, reinício, payload, mensagem de WhatsApp e falha/retentativa/sucesso simulados no webhook. Nenhum registro fictício foi enviado ao Make.
+
+O botão Enviar e abrir WhatsApp abre a mensagem e envia os dados ao webhook no mesmo clique, sem aguardar a resposta HTTP para abrir o aplicativo. Falhas no webhook permitem repetir apenas o registro, sem abrir outra conversa. Navegadores que bloqueiam a nova aba recebem um link de recuperação. O envio da mensagem é confirmado pelo visitante dentro do WhatsApp.
