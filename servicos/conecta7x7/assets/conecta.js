@@ -128,7 +128,7 @@ async function send(launchWhatsApp = true) {
 function reset(interactive = true) {
   if (sending) return;
   step = 0; sent = false; whatsappOpened = false; transcript = []; data = { requestId: requestId() };
-  status.textContent = 'Você revisa os dados. Um clique registra o pedido e abre o WhatsApp.';
+  status.textContent = '';
   ask(interactive);
 }
 function answer(value) {

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="250" viewBox="0 0 600 250" fill="none">
+<defs><radialGradient id="glow"><stop stop-color="#ff7a1a" stop-opacity=".17"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></radialGradient><linearGradient id="panel" x1="211" y1="45" x2="380" y2="208" gradientUnits="userSpaceOnUse"><stop stop-color="#303947"/><stop offset="1" stop-color="#171e28"/></linearGradient><filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dy="12" stdDeviation="15" flood-opacity=".25"/></filter></defs>
+<ellipse cx="300" cy="125" rx="270" ry="123" fill="url(#glow)"/>
+<ellipse cx="300" cy="125" rx="205" ry="83" stroke="#3a4658" stroke-dasharray="5 9"/>
+<path d="M123 115H208M391 115H477M300 194V225" stroke="#ff7a1a" stroke-width="2"/>
+<circle cx="163" cy="115" r="4" fill="#ff7a1a"/><circle cx="436" cy="115" r="4" fill="#ff7a1a"/>
+<g filter="url(#shadow)"><rect x="206" y="39" width="188" height="157" rx="18" fill="url(#panel)" stroke="#69788d"/><path d="M206 72H394" stroke="#46546a"/><circle cx="223" cy="56" r="3" fill="#8798b0"/><circle cx="234" cy="56" r="3" fill="#8798b0"/><circle cx="245" cy="56" r="3" fill="#8798b0"/><rect x="229" y="92" width="142" height="76" rx="10" fill="#ff7a1a"/><text x="300" y="145" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="48" font-weight="700" letter-spacing="-4" fill="#20150d">7x7<tspan fill="#71320b">.</tspan></text></g>
+<g><circle cx="94" cy="115" r="34" fill="#1c2430" stroke="#5b6c83"/><circle cx="94" cy="107" r="10" fill="#c3cfdf"/><path d="M76 135V132C76 114 112 114 112 132V135" fill="#c3cfdf"/>
+<circle cx="506" cy="115" r="34" fill="#1c2430" stroke="#5b6c83"/><circle cx="506" cy="107" r="10" fill="#c3cfdf"/><path d="M488 135V132C488 114 524 114 524 132V135" fill="#c3cfdf"/></g>
+<circle cx="300" cy="223" r="15" fill="#ff7a1a"/><path d="M293 223L298 228L308 217" stroke="#20150d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="168" cy="63" r="4" fill="#ff7a1a" fill-opacity=".6"/><path d="M431 176H443M437 170V182" stroke="#ff7a1a" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -17,3 +17,5 @@ Os depoimentos são exemplos explicitamente identificados como ilustrativos. Sub
 As perguntas e respostas ficam em memória nesta aba, sem armazenamento persistente. O endpoint deve validar dados, tratar spam e habilitar CORS. O teste de integração usou respostas simuladas para evitar registros fictícios no Make.
 
 O chat tem três perguntas: nome, contato (e-mail ou WhatsApp) e quantidade de funcionários, com as opções Apenas eu, De 2 a 5 e Mais de 5. O resumo e a mensagem de WhatsApp usam esses mesmos três campos.
+
+O hero usa `demo.js` para simular a apresentação da empresa, as perguntas e a organização do atendimento em um loop de 10 segundos. Inicia ao entrar na tela e pausa ao sair ou ocultar a aba. Não exibe legenda, controles ou títulos das etapas. Movimento reduzido mostra uma visão final estática. É uma simulação local, sem chamadas ao webhook ou abertura do WhatsApp.
