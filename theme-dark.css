@@ -1,0 +1,48 @@
+/* Dark visual study. Remove this stylesheet to return to the light palette. */
+:root{color-scheme:dark;--paper:#181411;--ink:#f5eee8;--green:#ff9856;--lime:#ff9856;--muted:#bfb0a4;--line:#44372e;--secondary:#c8b9ac;--quiet:#b9a797;--button-ink:#25150b}
+::selection{background:var(--lime);color:var(--button-ink)}
+.hero-note,.how-intro,.step p,.conversation-context,.service-return{color:var(--secondary)}
+.hero-note b,.step h3{color:var(--ink)}
+.muted{color:#af9b8c}
+.section-label>span:last-child,.portrait-caption small,.conversation-stage .chat-privacy,.conversation-form #answer-hint,footer{color:var(--quiet)}
+.portrait-orbit{background:radial-gradient(ellipse at 45% 40%,#573521,#342319 65%,#231a14)}
+.portrait-type{-webkit-text-stroke-color:#805439}
+.portrait{filter:saturate(.65) brightness(.9)}
+.hero-bottom a span{border-color:#806047}
+.hero h1 strong{color:var(--button-ink)}
+.hero h1 .period{color:#87431d}
+.conversation-top button{border-color:#8c6041}
+.conversation-form input{border-bottom-color:#8c6a52;caret-color:var(--lime)}
+.conversation-form input::placeholder{color:#bd9f88;opacity:1}
+.conversation-form input:focus{border-bottom-color:var(--lime)}
+.conversation-form button,.conversation-actions button,.conversation-actions a,.start-chat,.skip-link{color:var(--button-ink)}
+.conversation-actions button:not(.primary){color:var(--green);border-bottom-color:#926547}
+.conversation-form input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0 0 1000px var(--paper) inset;caret-color:var(--lime)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline-color:var(--lime)}
+
+.conversation-form button:hover,.conversation-actions button.primary:hover,.conversation-actions a:hover,.start-chat:hover{background:#ffad76}
+.conversation-actions button:not(.primary):hover{background:#38261a}
+/* Larger reading sizes across the main page and service page. */
+.header nav{font-size:16px}.eyebrow{font-size:13px;line-height:1.6}
+.hero-note{font-size:19px;line-height:1.7}.hero-bottom{font-size:12px;line-height:1.6}
+.portrait-caption{font-size:15px}.portrait-caption small{font-size:13px;line-height:1.7}
+.section-label{font-size:13px;line-height:1.7;gap:24px}
+.how-intro{font-size:24px}.step h3{font-size:24px}.step p{font-size:18px;line-height:1.8}.step>span{font-size:14px}
+.sell>span{font-size:13px}.conversation-top button{font-size:16px}
+.conversation-stage>.eyebrow{font-size:13px}.conversation-context{font-size:clamp(20px,1.8vw,26px);line-height:1.7}
+.conversation-form button,.conversation-actions button,.conversation-actions a{font-size:18px}
+.conversation-form #answer-hint,.conversation-stage .chat-privacy{font-size:15px;line-height:1.7}
+.offer .human-note{font-size:16px;line-height:1.7}.service-return{font-size:17px}
+footer{font-size:14px;line-height:1.7}
+@media(max-width:700px){
+.header{height:auto;min-height:84px;gap:14px;padding-block:16px}.header nav a:last-child{font-size:14px}
+.eyebrow{font-size:11px}.hero-note{font-size:17px}.hero-bottom{font-size:10px;gap:12px}.hero-bottom>span{max-width:140px}.hero-bottom a{max-width:55%;display:flex;align-items:center;gap:8px}.hero-bottom a span{flex-shrink:0}
+.portrait-caption{font-size:14px}.portrait-caption small{font-size:12px}
+.section-label{font-size:11px;gap:16px}.section-label>span:last-child{max-width:48%}
+.how-intro{font-size:21px}.step h3{font-size:22px}.step p{font-size:17px}.step{gap:16px}.step>span{font-size:13px}
+.sell>span{font-size:12px}.conversation-top{gap:18px}.conversation-top .eyebrow{max-width:55%;font-size:11px}.conversation-top button{font-size:14px}
+.conversation-stage>.eyebrow{font-size:12px}.conversation-context{font-size:20px;line-height:1.65}
+.conversation-form button,.conversation-actions button,.conversation-actions a{font-size:17px}
+.conversation-form #answer-hint,.conversation-stage .chat-privacy{font-size:14px}
+.offer .human-note{font-size:15px}.service-return{font-size:16px}footer{font-size:13px;gap:18px}
+}

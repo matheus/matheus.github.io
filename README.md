@@ -1,35 +1,24 @@
 # matheusgodoy.com
 
-Site estático em HTML, CSS e JavaScript puro, compatível com GitHub Pages. Não requer instalação ou compilação.
+Página estática em HTML, CSS e JavaScript, compatível com GitHub Pages. Sem compilação.
 
-## Visualizar localmente
+## Estrutura
 
-Na pasta do projeto:
+- `index.html`: Porquê (hero), Como (mapeamento e transformação) e O Que (chat).
+- `styles.css`: tema claro, tipografia, responsividade e animações com suporte a movimento reduzido.
+- `conversation-v3.js`: conversa guiada, uma pergunta por vez, e envio opcional de contato. `app.js` mantém um carregador de compatibilidade.
+- `assets/matheus-cutout.png`: retrato com fundo transparente.
 
-```sh
-python3 -m http.server 8000 --bind 127.0.0.1
-```
+## Configurar o envio
 
-Abra http://localhost:8000. Encerre com Ctrl+C.
+O webhook do Make já está configurado em `CHAT_CONFIG.webhookUrl`, no início de `conversation-v3.js`. Nenhum segredo deve ser colocado no frontend. Sem URL, a página informa que a captação está indisponível e oferece o WhatsApp, sem transmitir as respostas.
 
-## Arquivos da página principal
+A conversa pede nome, e-mail e empresa/site, apresenta o Conecta 7x7 e mostra um resumo. O envio só ocorre ao clicar em **Confirmar e enviar**, após o aviso de uso dos dados. Não há armazenamento persistente nem envio por abandono da página.
 
-- `index.html`: três seções, conteúdo, escopo, preço, CTA e metadados.
-- `styles.css`: composição responsiva, tipografia e animações.
-- `app.js`: WhatsApp, entradas progressivas, semana e demonstração ClimaPrime.
-- `assets/matheus-godoy.webp`: retrato otimizado a partir de `avatar.jpg`.
-- `CNAME`: domínio personalizado; preservar ao publicar.
+O endpoint deve aceitar POST JSON, responder com status 2xx apenas após receber os dados e permitir CORS para `https://matheusgodoy.com` (incluindo o preflight OPTIONS). O corpo contém `requestId`, `source`, `service`, `name`, `email`, `company`, `transcript` (role/content), `consent` e `submittedAt`. Use `requestId` para deduplicar tentativas. O salvamento em planilha é responsabilidade do fluxo do webhook. Configure validação e proteção contra spam no servidor.
 
-O contato comercial está centralizado em `WHATSAPP_NUMBER` no início de `app.js`. O link em HTML também permite usar o CTA sem JavaScript; ao alterar o número ou a mensagem, atualizar esse fallback.
+A descrição inicial do Conecta 7x7 está em `CHAT_CONFIG.serviceDescription`; confirme o escopo comercial antes de publicar. O nome/site não permite inferir o ramo automaticamente: o chat informa que essa descoberta será aprofundada na conversa com Matheus.
 
-A demonstração inicia ao entrar na área visível, executa uma única vez e permite pausar e reiniciar. Ao sair da tela ou ocultar a aba, ela pausa. Com movimento reduzido, o visitante avança manualmente pelas etapas. A demonstração não abre WhatsApp nem envia dados.
+## Visualização
 
-## Conferência visual
-
-- Conferir larguras de 320, 375, 768 e 1440 pixels e zoom de 200%.
-- Navegar por Tab: pular para conteúdo, pausar, assistir novamente e CTA final.
-- Verificar as seis cenas e o retorno à página inicial, incluindo pausa e replay.
-- Ativar movimento reduzido e avançar pelas etapas manualmente.
-- Conferir a mensagem no WhatsApp sem enviá-la.
-
-As páginas independentes e os favicons existentes foram preservados. Nenhuma publicação automática faz parte da implementação.
+Sirva a pasta com um servidor HTTP local e abra `index.html`. Confira desktop, celular, navegação por teclado, movimento reduzido, reinício e o fluxo do chat. Teste o webhook com um endpoint de testes antes de habilitar a captação. As outras páginas e o CNAME foram preservados.
