@@ -65,7 +65,7 @@ function serviceIntro() {
   choice('Conhecer o Conecta 7x7 ↗', () => {
     show('product', 'Conheça o Conecta 7x7.', `${CHAT_CONFIG.serviceDescription}\n\nFunciona assim: o visitante conhece sua empresa, responde às perguntas do atendimento e sua equipe recebe as informações organizadas para continuar a conversa. O Matheus define com você o conteúdo, as perguntas e as integrações necessárias.`, '04');
     const serviceLink = document.createElement('a');
-    serviceLink.href = '/servicos/conecta.html';
+    serviceLink.href = '/servicos/conecta7x7/index.html';
     serviceLink.target = '_blank';
     serviceLink.rel = 'noopener noreferrer';
     serviceLink.textContent = 'Ver o Conecta 7x7 em detalhes ↗';

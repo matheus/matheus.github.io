@@ -1,6 +1,6 @@
 # Conecta 7x7 — demonstração independente
 
-A página `../conecta.html` usa exclusivamente os assets desta pasta. Não depende do CSS, tema ou JavaScript da página principal.
+A página `../index.html` usa exclusivamente os assets desta pasta. Não depende do CSS, tema ou JavaScript da página principal.
 
 - `conecta.css`: identidade visual, fontes, layout centralizado, animação de montagem dos depoimentos e responsividade.
 - `conecta-flow.svg`: ilustração vetorial original do fluxo conversa → atendimento.
@@ -8,7 +8,7 @@ A página `../conecta.html` usa exclusivamente os assets desta pasta. Não depen
 
 O destino da demonstração é o WhatsApp de Matheus (`CONECTA_CONFIG.whatsappNumber`). Troque pelo número internacional do cliente ao adaptar. O webhook é o mesmo da página principal.
 
-O POST JSON inclui `conecta: true`, `page: "/servicos/conecta.html"`, `source`, `service`, `requestId`, `name`, `contact`, `employees`, `transcript`, `consent` e `submittedAt`. Ele só acontece após a confirmação. O cenário do Make pode usar `conecta` para distinguir esta origem. Deduplicar pelo `requestId` evita duplicatas em tentativas após falhas.
+O POST JSON inclui `conecta: true`, `page: "/servicos/conecta7x7/index.html"`, `source`, `service`, `requestId`, `name`, `contact`, `employees`, `transcript`, `consent` e `submittedAt`. Ele só acontece após a confirmação. O cenário do Make pode usar `conecta` para distinguir esta origem. Deduplicar pelo `requestId` evita duplicatas em tentativas após falhas.
 
 Depois do recebimento HTTP 2xx, o visitante pode abrir o WhatsApp com todas as respostas preenchidas. Ele precisa confirmar o envio no aplicativo. A página não usa a API de envio automático do WhatsApp. Em caso de erro no webhook, permite tentar novamente ou continuar pelo WhatsApp, informando que o recebimento pelo site não foi confirmado.
 

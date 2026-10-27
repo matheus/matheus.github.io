@@ -10,7 +10,7 @@ vm.runInNewContext(source,{crypto,matchMedia:()=>({matches:true}),window:{},docu
 assert.match(select('#answer-label').textContent,/Como posso/);
 for(const value of ['Maria','maria@example.com','Minha empresa']){select('#answer').value=value;select('#chat-form').listeners.submit({preventDefault(){}})}
 select('#chat-actions').children[0].listeners.click();assert.match(select('#answer-label').textContent,/Conecta/);
-assert.equal(select('#chat-actions').children[0].href,'/servicos/conecta.html');assert.equal(select('#chat-actions').children[0].target,'_blank');assert(fs.existsSync('servicos/conecta.html'));
+assert.equal(select('#chat-actions').children[0].href,'/servicos/conecta7x7/index.html');assert.equal(select('#chat-actions').children[0].target,'_blank');assert(fs.existsSync('servicos/conecta7x7/index.html'));
 select('#chat-actions').children[1].listeners.click();assert.match(select('#messages').textContent,/Maria/);
 assert.equal(requests.length,0,'No transmission before confirmation');
 assert.equal(select('#chat-actions').children[0].textContent,'Confirmar e enviar ↗');
@@ -23,5 +23,5 @@ assert.match(select('#messages').textContent,/contato foi recebido/);
 assert.equal(JSON.parse(requests[1].body).requestId,payload.requestId,'Retry preserves deduplication ID');
 select('#restart').listeners.click();assert.match(select('#answer-label').textContent,/Como posso/);assert.equal(select('#answer').value,'');console.log('PASS: '+name+' — full flow, explicit confirmation, payload, failed send, retry, success and reset');}
 assert(!source.includes('randomUUID('));
-assert.match(fs.readFileSync('index.html','utf8'),/defer src="\.\/conversation-v3.js\?v=service-link-1"/);
+assert.match(fs.readFileSync('index.html','utf8'),/defer src="\.\/conversation-v3.js\?v=service-path-2"/);
 })().catch(error=>{console.error(error);process.exitCode=1});
