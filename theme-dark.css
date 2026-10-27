@@ -1,27 +1,27 @@
 /* Dark visual study. Remove this stylesheet to return to the light palette. */
-:root{color-scheme:dark;--paper:#181411;--ink:#f5eee8;--green:#ff9856;--lime:#ff9856;--muted:#bfb0a4;--line:#44372e;--secondary:#c8b9ac;--quiet:#b9a797;--button-ink:#25150b}
+:root{color-scheme:dark;--paper:#101217;--ink:#f5f7fa;--green:#ff7a1a;--lime:#ff7a1a;--muted:#bfc5cf;--line:#343a44;--secondary:#bfc5cf;--quiet:#a9b1be;--button-ink:#1d130b}
 ::selection{background:var(--lime);color:var(--button-ink)}
 .hero-note,.how-intro,.step p,.conversation-context,.service-return{color:var(--secondary)}
 .hero-note b,.step h3{color:var(--ink)}
-.muted{color:#af9b8c}
+.muted{color:#a5aebb}
 .section-label>span:last-child,.portrait-caption small,.conversation-stage .chat-privacy,.conversation-form #answer-hint,footer{color:var(--quiet)}
-.portrait-orbit{background:radial-gradient(ellipse at 45% 40%,#573521,#342319 65%,#231a14)}
-.portrait-type{-webkit-text-stroke-color:#805439}
+.portrait-orbit{background:radial-gradient(ellipse at 45% 40%,#303b4b,#202833 65%,#171d25)}
+.portrait-type{-webkit-text-stroke-color:#54647b}
 .portrait{filter:saturate(.65) brightness(.9)}
-.hero-bottom a span{border-color:#806047}
+.hero-bottom a span{border-color:#687487}
 .hero h1 strong{color:var(--button-ink)}
-.hero h1 .period{color:#87431d}
-.conversation-top button{border-color:#8c6041}
-.conversation-form input{border-bottom-color:#8c6a52;caret-color:var(--lime)}
-.conversation-form input::placeholder{color:#bd9f88;opacity:1}
+.hero h1 .period{color:#71320b}
+.conversation-top button{border-color:#687487}
+.conversation-form input{border-bottom-color:#727c8d;caret-color:var(--lime)}
+.conversation-form input::placeholder{color:#a5aebb;opacity:1}
 .conversation-form input:focus{border-bottom-color:var(--lime)}
 .conversation-form button,.conversation-actions button,.conversation-actions a,.start-chat,.skip-link{color:var(--button-ink)}
-.conversation-actions button:not(.primary){color:var(--green);border-bottom-color:#926547}
+.conversation-actions button:not(.primary){color:var(--green);border-bottom-color:#687487}
 .conversation-form input:-webkit-autofill{-webkit-text-fill-color:var(--ink);-webkit-box-shadow:0 0 0 1000px var(--paper) inset;caret-color:var(--lime)}
 a:focus-visible,button:focus-visible,input:focus-visible{outline-color:var(--lime)}
 
-.conversation-form button:hover,.conversation-actions button.primary:hover,.conversation-actions a:hover,.start-chat:hover{background:#ffad76}
-.conversation-actions button:not(.primary):hover{background:#38261a}
+.conversation-form button:hover,.conversation-actions button.primary:hover,.conversation-actions a:hover,.start-chat:hover{background:#ff963f}
+.conversation-actions button:not(.primary):hover{background:#242a34}
 /* Larger reading sizes across the main page and service page. */
 .header nav{font-size:16px}.eyebrow{font-size:13px;line-height:1.6}
 .hero-note{font-size:19px;line-height:1.7}.hero-bottom{font-size:12px;line-height:1.6}
